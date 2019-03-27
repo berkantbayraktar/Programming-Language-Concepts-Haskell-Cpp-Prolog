@@ -5,7 +5,13 @@ data ASTDatum = ASTSimpleDatum String | ASTLetDatum String deriving (Show, Read)
 data AST = EmptyAST | ASTNode ASTDatum AST AST deriving (Show, Read)
 
 isNumber :: String -> Bool
-eagerEvaluation :: AST -> ASTResult
-normalEvaluation :: AST -> ASTResult
+--eagerEvaluation :: AST -> ASTResult
+--normalEvaluation :: AST -> ASTResult
 -- DO NOT MODIFY OR DELETE THE LINES ABOVE -- 
 -- IMPLEMENT isNumber, eagerEvaluation and normalEvaluation FUNCTIONS ACCORDING TO GIVEN SIGNATURES -- 
+
+
+isNumber [] = True
+isNumber (x:xs) = (x >= '0' && x <= '9' || x== '-') && (isNumber xs)
+
+
