@@ -19,12 +19,12 @@ getLeft (ASTNode _ left _ ) = left
 getRight (ASTNode _ _ right) = right
 
 
-bindNormal (ASTNode datum left right) = 
-    case datum of
-        ASTLetDatum var ->  case (getDatum right) of
-                                ASTSimpleDatum dat ->  ASTNode (ASTSimpleDatum dat) left left
-                                ASTLetDatum dat -> bindNormal right
-        _ -> ASTNode datum left right
+bindNormal (ASTNode (ASTLetDatum var) left right) = 
+    case (getDatum right) of
+        ASTSimpleDatum dat ->  ASTNode (ASTSimpleDatum dat) left left
+        ASTLetDatum dat -> bindNormal right
+        
+bindNormal (ASTNode (ASTSimpleDatum var) left right) = (ASTNode (ASTSimpleDatum var) left right)
         
 
 evaluate (ASTNode (ASTSimpleDatum "cat") left right) = evaluate left ++ evaluate right
