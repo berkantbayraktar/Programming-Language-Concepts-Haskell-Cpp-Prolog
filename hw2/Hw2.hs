@@ -23,9 +23,9 @@ getElement (ASTLetDatum ele) = ele
 
 bindNormal (ASTNode (ASTLetDatum var) left right) = 
     case (getDatum right) of
-        ASTSimpleDatum dat ->   if(dat == var)
+        ASTSimpleDatum dat ->   if(dat == var) -- dat == variable like x
                                     then left
-                                else
+                                else -- dat == cat || len || plus || times || negate
                                     if ( getElement (getDatum(getLeft right)) == var && getElement (getDatum(getRight right)) == var)
                                         then ASTNode (ASTSimpleDatum dat) left left
                                     else if (getElement (getDatum(getLeft right)) == var) 
@@ -39,6 +39,42 @@ bindNormal (ASTNode (ASTLetDatum var) left right) =
 bindNormal (ASTNode (ASTSimpleDatum var) left right) = (ASTNode (ASTSimpleDatum var) left right)
         
 
+bindEager (ASTNode (ASTLetDatum var) left right) =
+    let left_result = evaluate left
+    in 
+    case (getDatum right) of
+        ASTSimpleDatum dat ->   if(dat == var) -- dat == variable like x
+                                    then 
+                                    if(identify left == "num")
+                                        then ASTNode (ASTSimpleDatum "num") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST
+                                    else
+                                        ASTNode (ASTSimpleDatum "str") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST    
+                                else -- dat == cat || len || plus || times || negate
+                                    if((getElement $ getDatum $ getLeft $ right) == var &&  (getElement $ getDatum $ getRight $ right) == var) 
+                                        then 
+                                        if(identify left == "num")
+                                            then ASTNode (ASTSimpleDatum dat)  (ASTNode (ASTSimpleDatum "num") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST ) (ASTNode (ASTSimpleDatum "num") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST )         
+                                        else 
+                                            ASTNode (ASTSimpleDatum dat) (ASTNode (ASTSimpleDatum "str") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST) (ASTNode (ASTSimpleDatum "str") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST)
+                                    else if ((getElement $ getDatum $ getLeft $ right) == var)
+                                        then
+                                        if(identify left == "num")
+                                            then ASTNode (ASTSimpleDatum dat) (ASTNode (ASTSimpleDatum "num") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST) (bindEager (ASTNode (ASTLetDatum var) left (getRight right) )) 
+                                        else
+                                            ASTNode (ASTSimpleDatum dat) (ASTNode (ASTSimpleDatum "str") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST) (bindEager (ASTNode (ASTLetDatum var) left (getRight right) ))
+                                    else if ((getElement $ getDatum $ getRight $ right) == var)
+                                        then
+                                        if(identify left == "num")
+                                            then ASTNode (ASTSimpleDatum dat) (bindEager (ASTNode (ASTLetDatum var) left (getLeft right) )) (ASTNode (ASTSimpleDatum "num") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST)
+                                        else
+                                            ASTNode (ASTSimpleDatum dat) (bindEager (ASTNode (ASTLetDatum var) left (getLeft right) )) (ASTNode (ASTSimpleDatum "str") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST)       
+                                    else    
+                                        ASTNode (ASTSimpleDatum dat) (bindEager (ASTNode (ASTLetDatum var) left (getLeft right) )) (bindEager (ASTNode (ASTLetDatum var) left (getRight right) ))
+                                    
+
+        ASTLetDatum dat -> bindEager right    
+bindEager (ASTNode (ASTSimpleDatum var) left right) = (ASTNode (ASTSimpleDatum var) left right)
+
 evaluate (ASTNode (ASTSimpleDatum "cat") left right) = evaluate left ++ evaluate right
 evaluate (ASTNode (ASTSimpleDatum "str") left right) = evaluate left
 evaluate (ASTNode (ASTSimpleDatum "len") left right) = show (length (evaluate left ))
@@ -49,6 +85,8 @@ evaluate (ASTNode (ASTSimpleDatum "num") left right) = evaluate left
 evaluate (ASTNode (ASTSimpleDatum str) left right) = str
 
 step EmptyAST = 0
+step (ASTNode (ASTLetDatum var) left right) =
+    0 + step left + step right
 step (ASTNode (ASTSimpleDatum var) left right) = 
     if(var == "cat" || var == "len" || var == "times" || var == "negate"  || var == "plus")
         then (1 + step left + step right)
@@ -65,7 +103,7 @@ identify (ASTNode (ASTSimpleDatum var) left right) =
         
 
 normalEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
-
+eagerEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
 
 
 --eagerEvaluation (ASTNode datum left right) =
