@@ -6,7 +6,7 @@ data AST = EmptyAST | ASTNode ASTDatum AST AST deriving (Show, Read)
 
 isNumber :: String -> Bool
 --eagerEvaluation :: AST -> ASTResult
---normalEvaluation :: AST -> ASTResult
+normalEvaluation :: AST -> ASTResult
 -- DO NOT MODIFY OR DELETE THE LINES ABOVE -- 
 -- IMPLEMENT isNumber, eagerEvaluation and normalEvaluation FUNCTIONS ACCORDING TO GIVEN SIGNATURES -- 
 evaluate :: AST -> String
@@ -48,9 +48,23 @@ evaluate (ASTNode (ASTSimpleDatum "negate") left right) = show (-(read (evaluate
 evaluate (ASTNode (ASTSimpleDatum "num") left right) = evaluate left
 evaluate (ASTNode (ASTSimpleDatum str) left right) = str
 
+step EmptyAST = 0
+step (ASTNode (ASTSimpleDatum var) left right) = 
+    if(var == "cat" || var == "len" || var == "times" || var == "negate"  || var == "plus")
+        then (1 + step left + step right)
+    else -- var==str || var == num
+        0
 
+identify (ASTNode (ASTSimpleDatum var) left right) =
+    if(var == "len" || var == "times" || var == "negate"  || var == "plus")
+        then "num"
+    else if(var == "cat")
+        then "str"
+    else
+        "error"                 
+        
 
-normalEvaluation all@(ASTNode datum left right) = evaluate (bindNormal all)
+normalEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
 
 
 
