@@ -17,11 +17,23 @@ isNumber (x:xs) = (x >= '0' && x <= '9' || x== '-') && (isNumber xs)
 getDatum (ASTNode datum _ _ ) = datum
 getLeft (ASTNode _ left _ ) = left
 getRight (ASTNode _ _ right) = right
+getElement (ASTSimpleDatum ele) = ele
+getElement (ASTLetDatum ele) = ele
 
 
 bindNormal (ASTNode (ASTLetDatum var) left right) = 
     case (getDatum right) of
-        ASTSimpleDatum dat ->  ASTNode (ASTSimpleDatum dat) left left
+        ASTSimpleDatum dat ->   if(dat == var)
+                                    then left
+                                else
+                                    if ( getElement (getDatum(getLeft right)) == var && getElement (getDatum(getRight right)) == var)
+                                        then ASTNode (ASTSimpleDatum dat) left left
+                                    else if (getElement (getDatum(getLeft right)) == var) 
+                                        then ASTNode (ASTSimpleDatum dat) left (bindNormal (ASTNode (ASTLetDatum var) left (getRight right)))
+                                    else if (getElement (getDatum(getRight right)) == var)
+                                        then ASTNode (ASTSimpleDatum dat) (bindNormal (ASTNode (ASTLetDatum var) left (getLeft right))) left
+                                    else
+                                        ASTNode (ASTSimpleDatum dat) (bindNormal (ASTNode (ASTLetDatum var) left (getLeft right))) (bindNormal (ASTNode (ASTLetDatum var) left (getRight right)))
         ASTLetDatum dat -> bindNormal right
         
 bindNormal (ASTNode (ASTSimpleDatum var) left right) = (ASTNode (ASTSimpleDatum var) left right)
