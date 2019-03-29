@@ -96,9 +96,9 @@ step (ASTNode (ASTSimpleDatum var) left right) =
         0
 
 identify (ASTNode (ASTSimpleDatum var) _ _) =
-    if(var == "len" || var == "times" || var == "negate"  || var == "plus")
+    if(var == "len" || var == "times" || var == "negate"  || var == "plus" || var == "num")
         then "num"
-    else if(var == "cat")
+    else if(var == "cat" || var == "str")
         then "str"
     else
         "error"                 
