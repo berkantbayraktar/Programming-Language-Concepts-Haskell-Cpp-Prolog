@@ -11,8 +11,10 @@ normalEvaluation :: AST -> ASTResult
 -- IMPLEMENT isNumber, eagerEvaluation and normalEvaluation FUNCTIONS ACCORDING TO GIVEN SIGNATURES -- 
 evaluate :: AST -> String
 
-isNumber [] = True
-isNumber (x:xs) = (x >= '0' && x <= '9' || x== '-') && (isNumber xs)
+isNumberHelper [] = True
+isNumberHelper (x:xs) = (x >= '0' && x <= '9') && (isNumberHelper xs)
+isNumber [] = False
+isNumber (x:xs) = (x >= '0' && x <= '9' || x== '-') && (isNumberHelper xs)
 
 getDatum (ASTNode datum _ _ ) = datum
 getLeft (ASTNode _ left _ ) = left
@@ -93,7 +95,7 @@ step (ASTNode (ASTSimpleDatum var) left right) =
     else -- var==str || var == num
         0
 
-identify (ASTNode (ASTSimpleDatum var) left right) =
+identify (ASTNode (ASTSimpleDatum var) _ _) =
     if(var == "len" || var == "times" || var == "negate"  || var == "plus")
         then "num"
     else if(var == "cat")
@@ -101,6 +103,15 @@ identify (ASTNode (ASTSimpleDatum var) left right) =
     else
         "error"                 
         
+checkError (ASTNode (ASTSimpleDatum "num") left right) =   not (isNumber $ evaluate left) 
+checkError (ASTNode (ASTSimpleDatum "str") left right) = (isNumber $ evaluate left)
+checkError (ASTNode (ASTSimpleDatum "times") left right) = not ((isNumber $ evaluate left) && (isNumber $ evaluate $ right))
+checkError (ASTNode (ASTSimpleDatum "plus") left right) = not ((isNumber $ evaluate left) && (isNumber $ evaluate $ right))
+checkError (ASTNode (ASTSimpleDatum "negate") left right) = not (isNumber $ evaluate left) 
+checkError (ASTNode (ASTSimpleDatum "len") left right) = not (isNumber $ evaluate left) 
+checkError (ASTNode (ASTSimpleDatum "cat") left right) = not (not (isNumber $ evaluate left) && not (isNumber $ evaluate $ right))
+checkError (ASTNode (ASTSimpleDatum str) left right) =   True
+    
 
 normalEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
 eagerEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
