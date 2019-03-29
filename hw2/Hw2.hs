@@ -103,13 +103,13 @@ identify (ASTNode (ASTSimpleDatum var) _ _) =
     else
         "error"                 
         
-checkError (ASTNode (ASTSimpleDatum "num") left right) =   not (isNumber $ evaluate left) 
-checkError (ASTNode (ASTSimpleDatum "str") left right) = (isNumber $ evaluate left)
-checkError (ASTNode (ASTSimpleDatum "times") left right) = not ((isNumber $ evaluate left) && (isNumber $ evaluate $ right))
-checkError (ASTNode (ASTSimpleDatum "plus") left right) = not ((isNumber $ evaluate left) && (isNumber $ evaluate $ right))
-checkError (ASTNode (ASTSimpleDatum "negate") left right) = not (isNumber $ evaluate left) 
-checkError (ASTNode (ASTSimpleDatum "len") left right) = not (isNumber $ evaluate left) 
-checkError (ASTNode (ASTSimpleDatum "cat") left right) = not (not (isNumber $ evaluate left) && not (isNumber $ evaluate $ right))
+checkError (ASTNode (ASTSimpleDatum "num") left right) = not ((not $ null $ filter (== (getElement $ getDatum $ left)) ["times","plus","negate","len"] ) ||  ( isNumber $ getElement $ getDatum $ left))
+checkError (ASTNode (ASTSimpleDatum "str") left right) = not ((not $ null $ filter (== (getElement $ getDatum $ left)) ["cat"] ) || ( not $ isNumber $ getElement $ getDatum $ left))
+checkError (ASTNode (ASTSimpleDatum "times") left right) = checkError left || checkError right
+checkError (ASTNode (ASTSimpleDatum "plus") left right) = checkError left || checkError right
+checkError (ASTNode (ASTSimpleDatum "negate") left right) = checkError left 
+checkError (ASTNode (ASTSimpleDatum "len") left right) = checkError left
+checkError (ASTNode (ASTSimpleDatum "cat") left right) = checkError left || checkError right
 checkError (ASTNode (ASTSimpleDatum str) left right) =   True
     
 
