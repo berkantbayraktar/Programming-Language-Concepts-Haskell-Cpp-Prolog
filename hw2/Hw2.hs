@@ -113,5 +113,12 @@ checkError (ASTNode (ASTSimpleDatum "cat") left right) = not ( elem (getElement 
 checkError (ASTNode (ASTSimpleDatum str) left right) = False
     
 
-normalEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
-eagerEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
+normalEvaluation all@(ASTNode datum left right) = 
+    if(checkError $ bindNormal all)
+        then ASTError "error"
+    else ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
+    
+eagerEvaluation all@(ASTNode datum left right) = 
+    if(checkError $ bindEager all)
+        then ASTError "error"
+    else ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
