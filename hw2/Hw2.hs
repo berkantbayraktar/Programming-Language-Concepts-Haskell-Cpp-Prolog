@@ -103,14 +103,14 @@ identify (ASTNode (ASTSimpleDatum var) _ _) =
     else
         "error"                 
         
-checkError (ASTNode (ASTSimpleDatum "num") left right) = not ((not $ null $ filter (== (getElement $ getDatum $ left)) ["times","plus","negate","len"] ) ||  ( isNumber $ getElement $ getDatum $ left))
-checkError (ASTNode (ASTSimpleDatum "str") left right) = not ((not $ null $ filter (== (getElement $ getDatum $ left)) ["cat"] ) || ( not $ isNumber $ getElement $ getDatum $ left))
-checkError (ASTNode (ASTSimpleDatum "times") left right) = checkError left || checkError right
-checkError (ASTNode (ASTSimpleDatum "plus") left right) = checkError left || checkError right
-checkError (ASTNode (ASTSimpleDatum "negate") left right) = checkError left 
-checkError (ASTNode (ASTSimpleDatum "len") left right) = checkError left
-checkError (ASTNode (ASTSimpleDatum "cat") left right) = checkError left || checkError right
-checkError (ASTNode (ASTSimpleDatum str) left right) =   True
+checkError (ASTNode (ASTSimpleDatum "num") left right) = not ( elem (getElement $ getDatum $ left) ["times","plus","negate","len"]  ||  ( isNumber $ getElement $ getDatum $ left)) || checkError left
+checkError (ASTNode (ASTSimpleDatum "str") left right) = not ( elem (getElement $ getDatum $ left) ["cat"] || ( not $ isNumber $ getElement $ getDatum $ left)) ||  checkError left
+checkError (ASTNode (ASTSimpleDatum "times") left right) = not (elem (getElement $ getDatum $ left) ["num","times","plus","negate","len"]  && elem (getElement $ getDatum $ right) ["num","times","plus","negate","len"] ) ||  checkError left || checkError right
+checkError (ASTNode (ASTSimpleDatum "plus") left right) = not (elem (getElement $ getDatum $ left) ["num","times","plus","negate","len"]  && elem (getElement $ getDatum $ right) ["num","times","plus","negate","len"]) ||  checkError left || checkError right
+checkError (ASTNode (ASTSimpleDatum "negate") left right) =  not (elem (getElement $ getDatum $ left) ["num","times","plus","negate","len"]) || checkError left
+checkError (ASTNode (ASTSimpleDatum "len") left right) = not ( elem (getElement $ getDatum $ left) ["str","cat"]) || checkError left
+checkError (ASTNode (ASTSimpleDatum "cat") left right) = not ( elem (getElement $ getDatum $ left) ["str","cat"] && elem (getElement $ getDatum $ right) ["str","cat"]) || checkError left || checkError right
+checkError (ASTNode (ASTSimpleDatum str) left right) = False
     
 
 normalEvaluation all@(ASTNode datum left right) = ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
