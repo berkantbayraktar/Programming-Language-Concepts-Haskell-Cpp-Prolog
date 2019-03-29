@@ -104,7 +104,7 @@ identify (ASTNode (ASTSimpleDatum var) _ _) =
         "error"                 
         
 checkError (ASTNode (ASTSimpleDatum "num") left right) = not ( elem (getElement $ getDatum $ left) ["times","plus","negate","len"]  ||  ( isNumber $ getElement $ getDatum $ left)) || checkError left
-checkError (ASTNode (ASTSimpleDatum "str") left right) = not ( elem (getElement $ getDatum $ left) ["cat"] || ( not $ isNumber $ getElement $ getDatum $ left)) ||  checkError left
+checkError (ASTNode (ASTSimpleDatum "str") left right) = False
 checkError (ASTNode (ASTSimpleDatum "times") left right) = not (elem (getElement $ getDatum $ left) ["num","times","plus","negate","len"]  && elem (getElement $ getDatum $ right) ["num","times","plus","negate","len"] ) ||  checkError left || checkError right
 checkError (ASTNode (ASTSimpleDatum "plus") left right) = not (elem (getElement $ getDatum $ left) ["num","times","plus","negate","len"]  && elem (getElement $ getDatum $ right) ["num","times","plus","negate","len"]) ||  checkError left || checkError right
 checkError (ASTNode (ASTSimpleDatum "negate") left right) =  not (elem (getElement $ getDatum $ left) ["num","times","plus","negate","len"]) || checkError left
@@ -112,13 +112,59 @@ checkError (ASTNode (ASTSimpleDatum "len") left right) = not ( elem (getElement 
 checkError (ASTNode (ASTSimpleDatum "cat") left right) = not ( elem (getElement $ getDatum $ left) ["str","cat"] && elem (getElement $ getDatum $ right) ["str","cat"]) || checkError left || checkError right
 checkError (ASTNode (ASTSimpleDatum str) left right) = False
     
+showError (ASTNode (ASTSimpleDatum "num") left right) = 
+    if (isNumber $ getElement $ getDatum $ left)
+        then ASTError ("error")
+    else
+        ASTError ("the value '" ++ (getElement $ getDatum $ left) ++ "' is not a number!") 
+
+showError (ASTNode (ASTSimpleDatum "plus") left right) = 
+    if (checkError left)
+        then showError left
+    else if(checkError right)
+        then showError right    
+    else
+        ASTError ("plus operation is not defined between " ++ (getElement $ getDatum $ left) ++ " and " ++ (getElement $ getDatum $ right) ++ "!") 
+
+showError (ASTNode (ASTSimpleDatum "times") left right) = 
+    if (checkError left)
+        then showError left
+    else if(checkError right)
+        then showError right    
+    else
+        ASTError ("times operation is not defined between " ++ (getElement $ getDatum $ left) ++ " and " ++ (getElement $ getDatum $ right) ++ "!")
+
+showError (ASTNode (ASTSimpleDatum "cat") left right) = 
+    if (checkError left)
+        then showError left
+    else if(checkError right)
+        then showError right    
+    else
+        ASTError ("cat operation is not defined between " ++ (getElement $ getDatum $ left) ++ " and " ++ (getElement $ getDatum $ right) ++ "!")
+
+showError (ASTNode (ASTSimpleDatum "negate") left right) = 
+    if (checkError left)
+        then showError left   
+    else
+        ASTError ("negate operation is not defined on " ++ (getElement $ getDatum $ left) ++ "!")
+
+showError (ASTNode (ASTSimpleDatum "len") left right) = 
+    if (checkError left)
+        then showError left   
+    else
+        ASTError ("len operation is not defined on " ++ (getElement $ getDatum $ left) ++ "!")                  
+
+
+showError (ASTNode (ASTSimpleDatum "str") left right) = ASTError "Something wrong"
+showError (ASTNode (ASTSimpleDatum others) left right) = ASTError ("Something wrong")
+        
 
 normalEvaluation all@(ASTNode datum left right) = 
     if(checkError $ bindNormal all)
-        then ASTError "error"
+        then showError all
     else ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
     
 eagerEvaluation all@(ASTNode datum left right) = 
     if(checkError $ bindEager all)
-        then ASTError "error"
+        then showError all
     else ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
