@@ -27,6 +27,8 @@ bindNormal (ASTNode (ASTLetDatum var) left right) =
     case (getDatum right) of
         ASTSimpleDatum dat ->   if(dat == var) -- dat == variable like x
                                     then left
+                                else if (dat =="num" || dat == "str")
+                                    then right
                                 else -- dat == cat || len || plus || times || negate
                                     if ( getElement (getDatum(getLeft right)) == var && getElement (getDatum(getRight right)) == var)
                                         then ASTNode (ASTSimpleDatum dat) left left
@@ -51,6 +53,8 @@ bindEager (ASTNode (ASTLetDatum var) left right) =
                                         then ASTNode (ASTSimpleDatum "num") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST
                                     else
                                         ASTNode (ASTSimpleDatum "str") (ASTNode (ASTSimpleDatum left_result) EmptyAST EmptyAST ) EmptyAST    
+                                else if(dat == "num" || dat == "str")
+                                    then right        
                                 else -- dat == cat || len || plus || times || negate
                                     if((getElement $ getDatum $ getLeft $ right) == var &&  (getElement $ getDatum $ getRight $ right) == var) 
                                         then 
@@ -161,7 +165,7 @@ showError (ASTNode (ASTSimpleDatum others) left right) = ASTError ("Something wr
 
 normalEvaluation all@(ASTNode datum left right) = 
     if(checkError $ bindNormal all)
-        then showError all
+        then showError $ bindNormal all
     else ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
     
 eagerEvaluation all@(ASTNode datum left right) = 
