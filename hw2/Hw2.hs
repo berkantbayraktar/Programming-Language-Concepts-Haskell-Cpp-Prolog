@@ -176,4 +176,6 @@ eagerEvaluation all@(ASTNode (ASTSimpleDatum datum) left right) =
 eagerEvaluation all@(ASTNode (ASTLetDatum datum) left right) = 
     if(checkError left)
         then showError left
+    else if (checkError $ bindEager all)
+        then showError $ bindEager all    
     else ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
