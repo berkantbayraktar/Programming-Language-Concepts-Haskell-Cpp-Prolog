@@ -168,7 +168,12 @@ normalEvaluation all@(ASTNode datum left right) =
         then showError $ bindNormal all
     else ASTJust (evaluate (bindNormal all),identify(bindNormal all),step (bindNormal all))
     
-eagerEvaluation all@(ASTNode datum left right) = 
+eagerEvaluation all@(ASTNode (ASTSimpleDatum datum) left right) = 
     if(checkError $ bindEager all)
         then showError all
+    else ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
+
+eagerEvaluation all@(ASTNode (ASTLetDatum datum) left right) = 
+    if(checkError left)
+        then showError left
     else ASTJust (evaluate (bindEager all), identify (bindEager all), step all)
