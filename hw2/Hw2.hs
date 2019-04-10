@@ -173,15 +173,15 @@ normalEvaluation all@(ASTNode datum left right) =
 eagerEvaluation' all@(ASTNode (ASTSimpleDatum datum) left right) c  = 
     if(checkError $ bindEager all)
         then showError all
-    else ASTJust (evaluate (bindEager all), identify (bindEager all), step all+c)
+    else ASTJust (evaluate (bindEager all), identify (bindEager all),c)
 
 eagerEvaluation' all@(ASTNode (ASTLetDatum datum) left right) c = 
     if(checkError left)
         then showError left
     else if (shouldBindMore left)
-        then eagerEvaluation' (ASTNode (ASTLetDatum datum) (bindEager left) right) (step left)
+        then eagerEvaluation' (ASTNode (ASTLetDatum datum) (bindEager left) right) (c)
     else if (shouldBindMore all)
-        then eagerEvaluation' (bindEager all) (step left)     
-    else ASTJust (evaluate (bindEager all), identify (bindEager all), step all+c)
+        then eagerEvaluation' (bindEager all) (c)     
+    else ASTJust (evaluate (bindEager all), identify (bindEager all),c)
 
-eagerEvaluation ast = eagerEvaluation' ast 0    
+eagerEvaluation ast = eagerEvaluation' ast (step ast)    
