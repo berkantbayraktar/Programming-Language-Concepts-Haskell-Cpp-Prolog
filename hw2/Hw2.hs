@@ -14,7 +14,7 @@ evaluate :: AST -> String
 isNumberHelper [] = True
 isNumberHelper (x:xs) = (x >= '0' && x <= '9') && (isNumberHelper xs)
 isNumber [] = False
-isNumber (x:xs) = (x >= '0' && x <= '9' || x== '-') && (isNumberHelper xs)
+isNumber (x:xs) = if (xs == []) then (x >= '0' && x <= '9')  else (x >= '0' && x <= '9' || x== '-') && (isNumberHelper xs)
 
 
 getDatum (ASTNode datum _ _ ) = datum
