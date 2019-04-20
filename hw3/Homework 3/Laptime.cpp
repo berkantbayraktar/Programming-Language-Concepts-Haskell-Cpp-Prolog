@@ -16,7 +16,7 @@ Laptime::Laptime(const Laptime& rhs){
 }
 
 Laptime::~Laptime(){
-    delete next;
+   
 }
 
 void Laptime::addLaptime(Laptime *next){
@@ -31,28 +31,10 @@ bool  Laptime::operator>(const Laptime& rhs) const{
     return (laptime > rhs.laptime);
 }
 
-Laptime Laptime::operator[](const int lap) const{
-    Laptime *n = next;
-    for(int i = 1 ; i < lap ; i++){
-        n = n->next;
-
-        if(n == NULL)
-            break;
-    }
-
-    if(n == NULL)
-        return Laptime(0);
-    else if(lap == 0)
-        return *this;
-    else if (lap > 0)
-        return *n; 
-    else
-        return Laptime(0);       
-}
 
 Laptime& Laptime::operator+(const Laptime& rhs){
-    Laptime *total = new Laptime(laptime + rhs.laptime);
-    return *total;
+    this->laptime = this->laptime + rhs.laptime;
+    return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, const Laptime& laptime){
@@ -70,6 +52,11 @@ std::ostream& operator<<(std::ostream& os, const Laptime& laptime){
 
 }
 
-int Laptime::getLaptime(){
+int Laptime::getLaptime()const{
     return laptime;
 }
+
+Laptime * Laptime::getNext()const{
+    return next;
+}
+

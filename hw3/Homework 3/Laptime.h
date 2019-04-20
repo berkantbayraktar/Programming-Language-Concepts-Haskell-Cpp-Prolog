@@ -100,7 +100,8 @@ public:
     // DO NOT MODIFY THE UPPER PART
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
 
-    int getLaptime();
+    int getLaptime()const;
+    Laptime * getNext()const;
 
 };
 
