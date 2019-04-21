@@ -63,4 +63,3 @@ int Laptime::getLaptime()const{
 Laptime * Laptime::getNext()const{
     return next;
 }
-

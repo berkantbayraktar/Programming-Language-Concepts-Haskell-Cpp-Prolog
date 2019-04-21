@@ -155,3 +155,17 @@ Car * Car::getNext()const{
 Laptime * Car::getHead()const{
     return head;
 }
+
+
+int Car::getNumberOfLaps(){
+
+    Laptime *temp;
+    int numberOfLaps = 0;
+    temp = head;
+    while(temp != NULL){
+        numberOfLaps++;
+        temp = temp->getNext();
+    }
+    return numberOfLaps;
+
+}

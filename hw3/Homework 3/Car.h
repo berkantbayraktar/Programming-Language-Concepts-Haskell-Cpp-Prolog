@@ -131,6 +131,7 @@ public:
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
     Car * getNext()const;
     Laptime * getHead()const;
+    int getNumberOfLaps();
 };
 
 

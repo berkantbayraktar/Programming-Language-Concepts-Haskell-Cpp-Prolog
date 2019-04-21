@@ -36,6 +36,5 @@ int main (){
     --(*istanbul);
     cout << (*istanbul);
     
-    
     return 0;
 }

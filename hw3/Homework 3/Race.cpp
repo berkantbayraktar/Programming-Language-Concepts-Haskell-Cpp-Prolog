@@ -73,7 +73,18 @@ int Race::getNumberOfCarsinRace(){
 }
 
 void Race::goBacktoLap(int lap){
-
+    int revert_times = 0;
+    Car *current = head;
+    if(current == NULL)
+        return;
+    else{
+        while(current != NULL){
+            int revert_times = current->getNumberOfLaps() - lap - 1;
+            for(int i = 0 ; i < revert_times ; i++)
+                --(*this);
+            current = current->getNext();    
+        }
+    }    
 }
 
 void Race::operator++(){
@@ -91,17 +102,15 @@ void Race::operator--(){
 
     while(current != NULL){
         Laptime * traverse = current->getHead(); // Get first Lap
+        Laptime *temp ;
         if(traverse != NULL){
-            //std::cout<<*traverse<<std::endl;
-            while(traverse->getNext() != NULL && traverse->getNext()->getLaptime() != 0){
+            while(traverse->getNext() != NULL){
+                temp = traverse;
                 traverse = traverse->getNext();
-                //std::cout<<*traverse<<std::endl;
-            }
-            std::cout<<*traverse<<std::endl;
-             
+            }         
             delete traverse;
-              
-            
+            if(temp != NULL)
+                temp->addLaptime(NULL);
         }
         current = current->getNext();
     }

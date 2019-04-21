@@ -95,6 +95,7 @@ public:
 
     int getLaptime()const;
     Laptime * getNext()const;
+    
 
 };
 
