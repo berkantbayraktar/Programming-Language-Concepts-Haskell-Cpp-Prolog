@@ -21,12 +21,13 @@ Car::Car(const Car& rhs){
 }
 
 Car::~Car(){
-    Laptime *temp;
-    while(head != NULL){
-        temp = head-> getNext();
-        delete head;
-        head = temp;
+    Laptime *current = head;
+    while(current != NULL){
+        Laptime *n = current->getNext();
+        delete current;
+        current = n;
     }
+    head = NULL;
 }
 
 std::string Car::getDriverName() const{

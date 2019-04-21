@@ -14,12 +14,13 @@ Race::Race(const Race& rhs) : race_name(race_name),average_laptime(Utilizer::gen
 
 
 Race::~Race(){
-    Car *temp ;
-    while(head != NULL){
-        temp = head-> getNext();
-        delete head;
-        head = temp;
+    Car *current = head ;
+    while(current != NULL){
+        Car *n = current->getNext();
+        delete current;
+        current = n;
     }
+    delete head;
 }
 
 std::string Race::getRaceName()const{

@@ -29,12 +29,13 @@ int main (){
     cout << (*istanbul);
     --(*istanbul);
     cout << (*istanbul);
+   
+    cout << "terminating..." <<endl;
     --(*istanbul);
     cout << (*istanbul);
     --(*istanbul);
     cout << (*istanbul);
     --(*istanbul);
     cout << (*istanbul);
-    
     return 0;
 }
