@@ -89,12 +89,12 @@ void Race::goBacktoLap(int lap){
 }
 
 void Race::operator++(){
-    Car *temp = head;
-    while(temp != NULL){
+    Car *current = head;
+    while(current != NULL){
         
-        temp->Lap(Utilizer::generateAverageLaptime());
+        current->Lap(Utilizer::generateAverageLaptime());
         
-        temp = temp-> getNext();
+        current = current-> getNext();
     }
 }
 
