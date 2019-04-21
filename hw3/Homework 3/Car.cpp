@@ -148,3 +148,7 @@ std::ostream& operator<<(std::ostream& os, const Car& car){
 
     return os;
 }
+
+Car * Car::getNext()const{
+    return next;
+}

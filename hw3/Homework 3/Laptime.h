@@ -60,19 +60,12 @@ public:
      */
     bool operator>(const Laptime& rhs) const;
     
-    /**
-     * Indexing.
-     *
-     * Find the Laptime in desired position(start from zero).
-     *
-     * @return The Laptime with the given lap. Laptime with zero time if given lap does not exists.
-     */
-    Laptime operator[](const int lap) const;
+  
 
     /**
      *  Plus overload
      * 
-     *  Add two Laptime and return another Laptime
+     *  Add two Laptime and return the lhs Laptime
      * 
      *  @param Laptime to add
      *  @returns Summation of the two laptime
