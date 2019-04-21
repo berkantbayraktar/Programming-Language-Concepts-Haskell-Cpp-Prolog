@@ -20,7 +20,7 @@ public:
      *
      * @Important: Generate average_laptime by using Utilizer::generateAverageLaptime()
      * 
-     * @param int The year Race took place in.
+     * @param std::string The name of the Race.
      */
     Race(std::string race_name);
     /**
@@ -35,7 +35,7 @@ public:
 
     ~Race();
 
-    int getRaceName() const;
+    std::string getRaceName() const;
 
     /**
      * Add a new car to race. 
