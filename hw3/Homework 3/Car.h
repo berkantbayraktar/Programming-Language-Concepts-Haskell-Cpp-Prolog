@@ -130,6 +130,7 @@ public:
     // DO NOT MODIFY THE UPPER PART
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
     Car * getNext()const;
+    Laptime * getHead()const;
 };
 
 

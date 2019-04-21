@@ -27,7 +27,6 @@ Car::~Car(){
         delete head;
         head = temp;
     }
-    delete next;
 }
 
 std::string Car::getDriverName() const{
@@ -90,12 +89,12 @@ void Car::Lap(const Laptime& average_laptime){
     Laptime *new_laptime = new Laptime(average_laptime.getLaptime() + Utilizer::generateLaptimeVariance(performance));
     if(head == NULL){
         head = new_laptime;
-        std::cout << *head << std::endl;
+        //std::cout << *head << std::endl;
     }
     
     else{
         Laptime *temp = head;
-        std::cout << *new_laptime << std::endl;
+        //std::cout << *new_laptime << std::endl;
         while(temp->getNext() != NULL)
             temp = temp->getNext();
         temp->addLaptime(new_laptime);  
@@ -151,4 +150,8 @@ std::ostream& operator<<(std::ostream& os, const Car& car){
 
 Car * Car::getNext()const{
     return next;
+}
+
+Laptime * Car::getHead()const{
+    return head;
 }

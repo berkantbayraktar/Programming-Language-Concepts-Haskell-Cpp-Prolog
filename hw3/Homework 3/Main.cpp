@@ -9,8 +9,7 @@ int main(){
 
     
   
-
-    Car ferrari =  Car("Berkant Bayraktar");
+/*Car ferrari =  Car("Berkant Bayraktar");
     
     cout << "Driver Name: " << ferrari.getDriverName() << endl;
     cout << "Performance: " << ferrari.getPerformance() << endl;
@@ -37,7 +36,11 @@ int main(){
     cout << "First Lap: " << ferrari[0] << endl;
     cout << "Third Lap: " << ferrari[2] << endl;
     cout << "Sixth Lap: " << ferrari[5] << endl;
-    cout << "Error Lap: " << ferrari[6] << endl;
-
+    cout << "Error Lap: " << ferrari[6] << endl;*/
+    
+     Laptime *n = new Laptime(123123);
+     n->addLaptime(new Laptime(23123));
+     delete n;
+     cout <<"hello" ;
      return 0;
 }

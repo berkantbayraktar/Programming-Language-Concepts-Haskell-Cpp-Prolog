@@ -151,11 +151,10 @@ public:
      * @param car Car to be streamed.
      * @return The current Stream.
      */
-    friend std::ostream& operator<<(std::ostream& os, const Car& car);
+    friend std::ostream& operator<<(std::ostream& os, const Race& race);
 
     // DO NOT MODIFY THE UPPER PART
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
-
 };
 
 

@@ -5,6 +5,7 @@ YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE 
 */
 
+
 Laptime::Laptime(int laptime){
     this->laptime = laptime;
     this->next = NULL;
@@ -16,7 +17,10 @@ Laptime::Laptime(const Laptime& rhs){
 }
 
 Laptime::~Laptime(){
-   
+    if(next != NULL){
+        delete next; 
+        next = NULL;
+    }
 }
 
 void Laptime::addLaptime(Laptime *next){

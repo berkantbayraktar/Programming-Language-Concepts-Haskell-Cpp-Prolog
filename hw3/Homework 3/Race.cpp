@@ -9,20 +9,17 @@ const std::string driverList[10] = {"Ayrton Senna", "Michael Schumacher", "Jim C
 "Alain Prost", "Jackie Stewart", "Emerson Fittipaldi", "Nelson Piquet",
  "Sebastian Vettel"};
 
-Race::Race(std::string race_name){
-    this->race_name = race_name;
-    this->average_laptime = Utilizer::generateAverageLaptime();
-    this->head = NULL;
-}
+Race::Race(std::string race_name) : race_name(race_name), average_laptime(Utilizer::generateAverageLaptime()), head(NULL) {}
+Race::Race(const Race& rhs) : race_name(race_name),average_laptime(Utilizer::generateAverageLaptime()),head(NULL){}
 
-Race::Race(const Race& rhs){
-    this->race_name = rhs.race_name;
-    this->average_laptime = rhs.average_laptime;
-    /* LEFT OVER*/
-}
 
 Race::~Race(){
-
+    Car *temp ;
+    while(head != NULL){
+        temp = head-> getNext();
+        delete head;
+        head = temp;
+    }
 }
 
 std::string Race::getRaceName()const{
@@ -38,7 +35,7 @@ void Race::addCartoRace(){
 
     if(head == NULL){
         head = new_car;
-        std::cout << *head << std::endl;
+        //std::cout << *head << std::endl;
     }
     else{
         temp = head;
@@ -46,6 +43,7 @@ void Race::addCartoRace(){
             temp = temp->getNext();
         }
         temp->addCar(new_car);
+        //std::cout << *new_car << std::endl;
     }
 }
 
@@ -81,20 +79,28 @@ void Race::goBacktoLap(int lap){
 void Race::operator++(){
     Car *temp = head;
     while(temp != NULL){
+        
         temp->Lap(Utilizer::generateAverageLaptime());
+        
         temp = temp-> getNext();
     }
 }
 
 void Race::operator--(){
-    Car *temp = head;
-    if(temp == NULL)
+    Car *current = head;
+    Laptime *traverse ;
+    if(current == NULL)
         return;
     else{
-        while(temp->getNext() != NULL){
-            temp = temp->getNext();
+        while(current != NULL){
+            traverse = current->getHead();
+            while(traverse->getNext() != NULL){
+                traverse = traverse->getNext();
+            }
+            
+            delete traverse;
+            current = current->getNext();
         }
-        temp = NULL;
     }
 }
 
@@ -126,6 +132,13 @@ Race& Race::operator=(const Race& rhs){
     this->average_laptime = rhs.average_laptime;
 }
 
-std::ostream& operator<<(std::ostream& os, const Car& car){
-
+std::ostream& operator<<(std::ostream& os, const Race& race){
+    Car *temp = race.head;
+    int index = -48;
+    while(temp != NULL){
+        os << "00" << '1' + index << "--" << *temp << std::endl;
+        temp = temp ->getNext();
+        index++;
+    }
+    return os;
 }
