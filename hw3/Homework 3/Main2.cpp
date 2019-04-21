@@ -8,34 +8,38 @@ using namespace std;
 
 int main (){
     Car *ferrari = new Car("Berkant Bayraktar");
-    (*ferrari).Lap(Utilizer::generateAverageLaptime());
-    (*ferrari).Lap(Utilizer::generateAverageLaptime());
-    (*ferrari).Lap(Utilizer::generateAverageLaptime());
+    // (*ferrari).Lap(Utilizer::generateAverageLaptime());
+    // (*ferrari).Lap(Utilizer::generateAverageLaptime());
+    // (*ferrari).Lap(Utilizer::generateAverageLaptime());
     Car *mercedes = new Car("Izel Yemisci");
-    (*mercedes).Lap(Utilizer::generateAverageLaptime());
-    (*mercedes).Lap(Utilizer::generateAverageLaptime());
-    (*mercedes).Lap(Utilizer::generateAverageLaptime());
+    Car *yamaha = new Car("Bayraktar Serhat");
+    Car *renault = new Car("Bayraktar Osman");
+     Car *opel = new Car("Bayraktar Selda");
+    // (*mercedes).Lap(Utilizer::generateAverageLaptime());
+    // (*mercedes).Lap(Utilizer::generateAverageLaptime());
+    // (*mercedes).Lap(Utilizer::generateAverageLaptime());
     
     Race *istanbul = new Race("istanbul");
     (*istanbul).addCartoRace(*ferrari);
     (*istanbul).addCartoRace(*mercedes);
-        
+    (*istanbul).addCartoRace(*yamaha);
+    (*istanbul).addCartoRace(*renault);
+    (*istanbul).addCartoRace(*opel);
     cout << (*istanbul);
-    ++(*istanbul);
-    cout << (*istanbul);
-    ++(*istanbul);
-    cout << (*istanbul);
+    for(int i = 0 ; i < 15 ; i++){
+        ++(*istanbul);
+        cout << (*istanbul);
+    }
+            
+    
+    
     --(*istanbul);
     cout << (*istanbul);
     --(*istanbul);
     cout << (*istanbul);
+
+    cout << ((*istanbul)[0] > (*istanbul)[4])  << endl; ;
+    cout << (*istanbul).getNumberOfCarsinRace()  << endl; ;
    
-    cout << "terminating..." <<endl;
-    --(*istanbul);
-    cout << (*istanbul);
-    --(*istanbul);
-    cout << (*istanbul);
-    --(*istanbul);
-    cout << (*istanbul);
     return 0;
 }

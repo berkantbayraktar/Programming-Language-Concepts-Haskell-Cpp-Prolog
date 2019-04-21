@@ -14,13 +14,13 @@ Race::Race(const Race& rhs) : race_name(race_name),average_laptime(Utilizer::gen
 
 
 Race::~Race(){
-    Car *current = head ;
-    while(current != NULL){
-        Car *n = current->getNext();
-        delete current;
-        current = n;
-    }
-    delete head;
+    // Car *current = head ;
+    // while(current != NULL){
+    //     Car *n = current->getNext();
+    //     delete current;
+    //     current = n;
+    // }
+    // delete head;
 }
 
 std::string Race::getRaceName()const{
@@ -63,12 +63,12 @@ void Race::addCartoRace(Car& car){
 }
 
 int Race::getNumberOfCarsinRace(){
-    Car *temp;
+    Car *current = head;
     int numberOfCars = 0;
-    temp = head;
-    while(temp != NULL){
+    
+    while(current != NULL){
         numberOfCars++;
-        temp = temp->getNext();
+        current = current->getNext();
     }
     return numberOfCars;
 }
@@ -96,6 +96,7 @@ void Race::operator++(){
         
         current = current-> getNext();
     }
+    putCarsOrder();
 }
 
 void Race::operator--(){
@@ -155,4 +156,43 @@ std::ostream& operator<<(std::ostream& os, const Race& race){
         index++;
     }
     return os;
+}
+
+void Race::putCarsOrder(){
+   for (int i = 0 ; i < getNumberOfCarsinRace() -1 ; i++){
+       for(int j = 0 ; j < (getNumberOfCarsinRace() -1 -i) ; j++){
+           if((*this)[j] > (*this)[j+1]){
+                if(j== 0){  // swap 0 index and 1
+                    Car *a = (*this).getCar(j);
+                    Car *b = (*this).getCar(j+1);
+                    Car *c = (*this).getCar(j+2);
+                    a->addCar(c);
+                    b->addCar(a);
+                    head = b;
+                }
+                else{ //swap middle
+                    Car *a = (*this).getCar(j);
+                    Car *b = (*this).getCar(j+1);
+                    Car *c = (*this).getCar(j+2);
+                    Car *d = (*this).getCar(j-1);
+
+                    a->addCar(c);
+                    b->addCar(a);
+                    d->addCar(b);
+                    
+                }   
+           }
+       }
+   }       
+}
+
+Car* Race::getCar(const int car_in_position){
+    Car *temp = head;
+    for(int i = 0 ; i < car_in_position ; i++)
+    {
+        temp = temp->getNext();
+        if(temp == NULL)
+            break;
+    }
+    return temp;
 }
