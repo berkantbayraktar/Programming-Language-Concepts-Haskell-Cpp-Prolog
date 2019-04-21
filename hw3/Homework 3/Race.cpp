@@ -87,21 +87,25 @@ void Race::operator++(){
 }
 
 void Race::operator--(){
-    Car *current = head;
-    Laptime *traverse ;
-    if(current == NULL)
-        return;
-    else{
-        while(current != NULL){
-            traverse = current->getHead();
-            while(traverse->getNext() != NULL){
+    Car *current = head; // Get first Car
+
+    while(current != NULL){
+        Laptime * traverse = current->getHead(); // Get first Lap
+        if(traverse != NULL){
+            //std::cout<<*traverse<<std::endl;
+            while(traverse->getNext() != NULL && traverse->getNext()->getLaptime() != 0){
                 traverse = traverse->getNext();
+                //std::cout<<*traverse<<std::endl;
             }
-            
+            std::cout<<*traverse<<std::endl;
+             
             delete traverse;
-            current = current->getNext();
+              
+            
         }
+        current = current->getNext();
     }
+    
 }
 
 Car Race::operator[](const int car_in_position){

@@ -144,7 +144,7 @@ std::ostream& operator<<(std::ostream& os, const Car& car){
     tl = new Laptime(total_laptime);
 
     os  << p << "--" << (*ll) << "--" << (*fl) << "--" << (*tl);
-
+    
     return os;
 }
 

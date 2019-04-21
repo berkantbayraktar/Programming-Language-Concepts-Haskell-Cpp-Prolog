@@ -19,7 +19,7 @@ Laptime::Laptime(const Laptime& rhs){
 Laptime::~Laptime(){
     if(next != NULL){
         delete next; 
-        next = NULL;
+        next = NULL; 
     }
 }
 

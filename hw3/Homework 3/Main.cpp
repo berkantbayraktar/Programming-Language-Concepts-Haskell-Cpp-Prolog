@@ -38,9 +38,14 @@ int main(){
     cout << "Sixth Lap: " << ferrari[5] << endl;
     cout << "Error Lap: " << ferrari[6] << endl;*/
     
-     Laptime *n = new Laptime(123123);
-     n->addLaptime(new Laptime(23123));
-     delete n;
+    Laptime *n = new Laptime(1000);
+    Laptime *m = new Laptime(2000);
+    n->addLaptime(m);
+    cout << *n<<endl;
+    cout << *m<<endl;
+    delete n;
+    delete m;
+     
      cout <<"hello" ;
      return 0;
 }
