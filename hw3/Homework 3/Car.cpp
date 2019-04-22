@@ -103,7 +103,6 @@ void Car::Lap(const Laptime& average_laptime){
 }
 
 std::ostream& operator<<(std::ostream& os, const Car& car){
-    const long LONG_MAX = 9223372036854775807;
     long fastest_laptime = 0, latest_laptime = 0, total_laptime = 0;
     Laptime *temp,*ll,*fl,*tl;
     size_t pos = car.driver_name.find(" ");
@@ -163,7 +162,6 @@ int Car::getNumberOfLaps(){
 }
 
 long Car::getFastestLapTime()const{
-    const long LONG_MAX = 9223372036854775807;
     long fastest_laptime = 0;
 
     Laptime * current = head;

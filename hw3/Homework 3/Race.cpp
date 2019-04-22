@@ -74,7 +74,6 @@ int Race::getNumberOfCarsinRace()const{
 }
 
 void Race::goBacktoLap(int lap){
-    int revert_times = 0;
     Car *current = head;
     if(current == NULL)
         return;
@@ -268,7 +267,6 @@ Car* Race::getCar(const int car_in_position){
 
 int Race::indexOfTheFastestCar()const{ // returns index of the car which has the fastest lap in the Race
     Car *current = (*this).head;
-    const long LONG_MAX = 9223372036854775807;
     long fastest_laptime = 0;
     int numberOfcar = (*this).getNumberOfCarsinRace();
     int index = 0;

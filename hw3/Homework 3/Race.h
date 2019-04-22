@@ -3,6 +3,7 @@
 
 #include "Car.h"
 #include <ostream>
+#include <climits>
 
 class Race {
 

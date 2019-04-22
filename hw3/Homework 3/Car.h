@@ -4,6 +4,7 @@
 #include <ostream>
 #include <vector>
 #include <iomanip>
+#include <climits>
 #include "Laptime.h"
 
 class Car {
