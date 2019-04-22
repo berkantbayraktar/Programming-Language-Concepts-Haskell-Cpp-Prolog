@@ -43,9 +43,13 @@ int main(){
     n->addLaptime(m);
     cout << *n<<endl;
     cout << *m<<endl;
+    Car *ferrari = new Car("Berkant Bayraktar");
+    (*ferrari).Lap(Utilizer::generateAverageLaptime());
+    (*ferrari).Lap(Utilizer::generateAverageLaptime());
+    cout << "Informations Ferrari: " << *ferrari << endl;
     delete n;
     delete m;
+    delete ferrari;
      
-     cout <<"hello" ;
-     return 0;
+    return 0;
 }
