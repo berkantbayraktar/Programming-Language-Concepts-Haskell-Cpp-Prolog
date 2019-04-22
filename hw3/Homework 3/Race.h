@@ -157,6 +157,7 @@ public:
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
     void putCarsOrder();
     Car* getCar(const int car_in_position);
+    int indexOfTheFastestCar()const;
 };
 
 

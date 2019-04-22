@@ -133,6 +133,7 @@ public:
     Car * getNext()const;
     Laptime * getHead()const;
     int getNumberOfLaps();
+    long getFastestLapTime()const;
 };
 
 

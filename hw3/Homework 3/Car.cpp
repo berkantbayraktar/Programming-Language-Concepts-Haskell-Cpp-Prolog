@@ -123,15 +123,7 @@ std::ostream& operator<<(std::ostream& os, const Car& car){
     }
     
 
-    temp = car.head;
-    if(temp != NULL)
-        fastest_laptime = LONG_MAX;
-    
-    while(temp != NULL){
-        if(temp->getLaptime() < fastest_laptime)
-            fastest_laptime  = temp->getLaptime();
-        temp = temp->getNext();    
-    }
+    fastest_laptime = car.getFastestLapTime();
 
     temp = car.head;
     while(temp != NULL){
@@ -168,4 +160,21 @@ int Car::getNumberOfLaps(){
     }
     return numberOfLaps;
 
+}
+
+long Car::getFastestLapTime()const{
+    const long LONG_MAX = 9223372036854775807;
+    long fastest_laptime = 0;
+
+    Laptime * current = head;
+
+    if(current != NULL)
+        fastest_laptime = LONG_MAX;
+
+    while(current != NULL){
+        if(current->getLaptime() < fastest_laptime)
+            fastest_laptime  = current->getLaptime();
+        current = current->getNext();    
+    }
+    return fastest_laptime;
 }

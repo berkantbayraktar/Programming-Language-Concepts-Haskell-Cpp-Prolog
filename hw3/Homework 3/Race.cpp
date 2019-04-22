@@ -152,37 +152,77 @@ std::ostream& operator<<(std::ostream& os, const Race& race){
     int numberOfcars = race.getNumberOfCarsinRace();
     std::string str_numberOfcars = std::to_string(numberOfcars);
     int digit = str_numberOfcars.length();
+    int indexFastestCar = race.indexOfTheFastestCar();
 
-
-    int index = 1;
+    int rank = 1;
     while(current != NULL){
-        os << std::setfill('0') << std::setw(digit) << std::to_string(index);
+        os << std::setfill('0') << std::setw(digit) << std::to_string(rank);
         os << "--" << *current;
         
-        if(index == 1)
+        if(rank == 1){
             os << "--" << "25";
-        else if(index == 2)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 2){
             os << "--" << "18";
-        else if(index == 3)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 3){
             os << "--" << "15";
-        else if(index == 4)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 4){
             os << "--" << "12";
-        else if(index == 5)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 5){
             os << "--" << "10";
-        else if(index == 6)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 6){
             os << "--" << "8";
-        else if(index == 7)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 7){
             os << "--" << "6";
-        else if(index == 8)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 8){
             os << "--" << "4";
-        else if(index == 9)
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 9){
             os << "--" << "2";
-        else if(index == 10)
-            os << "--" << "1"; 
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1";
+        }
+            
+        else if(rank == 10){
+            os << "--" << "1";
+            if(indexFastestCar+1 == rank)
+                os << "--" << "1"; 
+        }
+            
 
         os << std::endl;
         current = current ->getNext();
-        index++;
+        rank++;
     }
     return os;
 }
@@ -224,4 +264,24 @@ Car* Race::getCar(const int car_in_position){
             break;
     }
     return temp;
+}
+
+int Race::indexOfTheFastestCar()const{ // returns index of the car which has the fastest lap in the Race
+    Car *current = (*this).head;
+    const long LONG_MAX = 9223372036854775807;
+    long fastest_laptime = 0;
+    int numberOfcar = (*this).getNumberOfCarsinRace();
+    int index = 0;
+
+    if(current != NULL)
+        fastest_laptime = LONG_MAX;
+
+    for(int i = 0 ; i < numberOfcar ; i++){
+        if( current->getFastestLapTime() < fastest_laptime ){
+            index = i;
+            fastest_laptime = current->getFastestLapTime();     
+        }
+        current = current->getNext();
+    }
+    return index;
 }
