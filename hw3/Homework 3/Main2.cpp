@@ -19,7 +19,7 @@ int main (){
     // (*mercedes).Lap(Utilizer::generateAverageLaptime());
     // (*mercedes).Lap(Utilizer::generateAverageLaptime());
     Race *istanbul = new Race("istanbul");
-    for(int i= 0 ; i < 5 ; i++){
+    for(int i= 0 ; i < 10 ; i++){
         (*istanbul).addCartoRace();
     }
      
@@ -29,7 +29,7 @@ int main (){
     // (*istanbul).addCartoRace(*renault);
     // (*istanbul).addCartoRace(*opel);
     cout << (*istanbul);
-    for(int i = 0 ; i < 3 ; i++){
+    for(int i = 0 ; i < 2 ; i++){
         ++(*istanbul);
         cout << (*istanbul);
     }
@@ -37,8 +37,7 @@ int main (){
     cout << (*istanbul);
             
 
-    cout << ((*istanbul)[0] > (*istanbul)[4])  << endl; ;
-    cout << (*istanbul).getNumberOfCarsinRace()  << endl; ;
+    cout << "Number of cars in the race: " << (*istanbul).getNumberOfCarsinRace()  << endl; ;
    
     return 0;
 }

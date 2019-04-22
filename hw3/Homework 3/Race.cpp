@@ -148,17 +148,40 @@ Race& Race::operator=(const Race& rhs){
 }
 
 std::ostream& operator<<(std::ostream& os, const Race& race){
-    Car *temp = race.head;
+    Car *current = race.head;
     int numberOfcars = race.getNumberOfCarsinRace();
     std::string str_numberOfcars = std::to_string(numberOfcars);
     int digit = str_numberOfcars.length();
 
 
-    int index = -48;
-    while(temp != NULL){
-        os << std::setfill('0') << std::setw(digit) << '1' + index ;
-        os << "--" << *temp << std::endl;
-        temp = temp ->getNext();
+    int index = 1;
+    while(current != NULL){
+        os << std::setfill('0') << std::setw(digit) << std::to_string(index);
+        os << "--" << *current;
+        
+        if(index == 1)
+            os << "--" << "25";
+        else if(index == 2)
+            os << "--" << "18";
+        else if(index == 3)
+            os << "--" << "15";
+        else if(index == 4)
+            os << "--" << "12";
+        else if(index == 5)
+            os << "--" << "10";
+        else if(index == 6)
+            os << "--" << "8";
+        else if(index == 7)
+            os << "--" << "6";
+        else if(index == 8)
+            os << "--" << "4";
+        else if(index == 9)
+            os << "--" << "2";
+        else if(index == 10)
+            os << "--" << "1"; 
+
+        os << std::endl;
+        current = current ->getNext();
         index++;
     }
     return os;
