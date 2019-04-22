@@ -51,7 +51,9 @@ std::ostream& operator<<(std::ostream& os, const Laptime& laptime){
     long sec = t / 1000;
     t = t - 1000 * sec;
 
-    os << min << ":" << sec << "." << t;
+    os << min << ":" ;
+    os << std::setfill('0') << std::setw(2) <<  sec << "." ;
+    os << std::setfill('0') << std::setw(3) << t;
     return os;
 
 }

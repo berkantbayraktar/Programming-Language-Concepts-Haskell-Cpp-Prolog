@@ -63,7 +63,7 @@ public:
      * @returns number of cars
      * 
      */
-    int getNumberOfCarsinRace();
+    int getNumberOfCarsinRace()const;
 
     /**
      * Return state of everything to desired lap's state

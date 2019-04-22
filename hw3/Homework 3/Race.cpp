@@ -5,9 +5,9 @@
 YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE 
 */
-const std::string driverList[10] = {"Ayrton Senna", "Michael Schumacher", "Jim Clark", "Juan Manuel Fangio" , "Fernando Alonso",
+const std::string driverList[13] = {"Ayrton Senna", "Michael Schumacher", "Jim Clark", "Juan Manuel Fangio" , "Fernando Alonso",
 "Alain Prost", "Jackie Stewart", "Emerson Fittipaldi", "Nelson Piquet",
- "Sebastian Vettel"};
+ "Sebastian Vettel", "Lewis Hamilton", "Max Verstappen", "Kimi Raikonnen"};
 
 Race::Race(std::string race_name) : race_name(race_name), average_laptime(Utilizer::generateAverageLaptime()), head(NULL) {}
 Race::Race(const Race& rhs) : race_name(race_name),average_laptime(Utilizer::generateAverageLaptime()),head(NULL){}
@@ -29,7 +29,7 @@ std::string Race::getRaceName()const{
 
 void Race::addCartoRace(){
     int index;
-    index = rand()%10;
+    index = rand()%13;
     std::string driver_name = driverList[index];
     Car *new_car = new Car(driver_name);
     Car *temp;
@@ -62,7 +62,7 @@ void Race::addCartoRace(Car& car){
     }
 }
 
-int Race::getNumberOfCarsinRace(){
+int Race::getNumberOfCarsinRace()const{
     Car *current = head;
     int numberOfCars = 0;
     
@@ -116,7 +116,7 @@ void Race::operator--(){
         }
         current = current->getNext();
     }
-    
+    putCarsOrder();
 }
 
 Car Race::operator[](const int car_in_position){
@@ -149,9 +149,15 @@ Race& Race::operator=(const Race& rhs){
 
 std::ostream& operator<<(std::ostream& os, const Race& race){
     Car *temp = race.head;
+    int numberOfcars = race.getNumberOfCarsinRace();
+    std::string str_numberOfcars = std::to_string(numberOfcars);
+    int digit = str_numberOfcars.length();
+
+
     int index = -48;
     while(temp != NULL){
-        os << "00" << '1' + index << "--" << *temp << std::endl;
+        os << std::setfill('0') << std::setw(digit) << '1' + index ;
+        os << "--" << *temp << std::endl;
         temp = temp ->getNext();
         index++;
     }

@@ -1,9 +1,8 @@
 #ifndef HW3_LAPTIME_H
 #define HW3_LAPTIME_H
 
-
 #include <ostream>
-
+#include <iomanip>
 
 class Laptime {
 
