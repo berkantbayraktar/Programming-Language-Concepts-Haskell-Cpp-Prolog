@@ -1,22 +1,41 @@
 #include "Car.h"
 #include "Utilizer.h"
+#include <iostream>
 /*
 YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE 
 */
 
-Car::Car(std::string driver_name){
+Car::Car(std::string driver_name){ //WORKS WELL
     this->driver_name = driver_name;
     this->performance = Utilizer::generatePerformance();
     this->head = NULL;
     this->next = NULL;
 }
 
-Car::Car(const Car& rhs){
+Car::Car(const Car& rhs){ //WORKS WELL
     this->driver_name = rhs.driver_name;
     this->performance = rhs.performance;
-    this->head = rhs.head;
     this->next = rhs.next;
+
+    Laptime *temp = rhs.head;
+    Laptime *current;
+    
+    while(temp != NULL){
+        if(head == NULL){
+            Laptime *new_laptime = new Laptime(temp->getLaptime());
+            head = new_laptime;
+            current = head;
+            temp = temp->getNext();
+        }
+
+        else{
+            Laptime *new_laptime = new Laptime(temp->getLaptime());
+            current->addLaptime(new_laptime);
+            current = current->getNext();
+            temp = temp->getNext();
+        }
+    }
 }
 
 Car::~Car(){
@@ -107,7 +126,7 @@ std::ostream& operator<<(std::ostream& os, const Car& car){
     Laptime *temp,*ll,*fl,*tl;
     size_t pos = car.driver_name.find(" ");
     std::string p =car.driver_name.substr(pos+1,3);
-    for(int i = 0 ; i < p.length() ; i++){
+    for(int i = 0 ; i < int(p.length()) ; i++){
         p [i] = toupper(p[i]);
     }
 
@@ -139,11 +158,11 @@ std::ostream& operator<<(std::ostream& os, const Car& car){
     return os;
 }
 
-Car * Car::getNext()const{
+Car* Car::getNext()const{
     return next;
 }
 
-Laptime * Car::getHead()const{
+Laptime* Car::getHead()const{
     return head;
 }
 

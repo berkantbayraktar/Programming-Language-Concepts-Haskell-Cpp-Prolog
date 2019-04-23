@@ -19,7 +19,6 @@ public:
     /**
      * Constructor.
      *
-     * @param Championship name.
      */
     Championship();
     /**

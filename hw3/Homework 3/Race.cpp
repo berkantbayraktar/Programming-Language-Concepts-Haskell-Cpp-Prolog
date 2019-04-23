@@ -10,7 +10,7 @@ const std::string driverList[13] = {"Ayrton Senna", "Michael Schumacher", "Jim C
  "Sebastian Vettel", "Lewis Hamilton", "Max Verstappen", "Kimi Raikonnen"};
 
 Race::Race(std::string race_name) : race_name(race_name), average_laptime(Utilizer::generateAverageLaptime()), head(NULL) {}
-Race::Race(const Race& rhs) : race_name(race_name),average_laptime(Utilizer::generateAverageLaptime()),head(NULL){}
+Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.average_laptime),head(NULL){}
 
 
 Race::~Race(){
@@ -141,9 +141,9 @@ Car Race::operator[](std::string driver_name){
 }
 
 Race& Race::operator=(const Race& rhs){
-    this->head = rhs.head;
-    this->race_name = rhs.race_name;
-    this->average_laptime = rhs.average_laptime;
+    Race temp(rhs);
+    std::swap(temp.head,head);
+    return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, const Race& race){

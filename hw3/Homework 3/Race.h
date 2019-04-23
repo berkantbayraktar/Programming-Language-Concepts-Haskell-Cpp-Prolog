@@ -4,6 +4,7 @@
 #include "Car.h"
 #include <ostream>
 #include <climits>
+#include <algorithm>
 
 class Race {
 
