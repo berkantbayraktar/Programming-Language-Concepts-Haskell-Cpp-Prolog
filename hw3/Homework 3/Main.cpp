@@ -61,19 +61,25 @@ int main(){
     // delete ferrari;
 
     Laptime a = Laptime(1000);
-    Laptime b = a;
+    
 
     Laptime *c = new Laptime(3000);
     Laptime *d = new Laptime(4000);
+    Laptime *f = new Laptime(5000);
     a.addLaptime(c);
-    b.addLaptime(d);
     
+    
+    
+    c->addLaptime(d);
+    Laptime b = a;
   
     cout << a <<endl;
     cout << b <<endl;
     
     cout << *(a.getNext()) <<endl;
     cout << *(b.getNext()) <<endl;
-     
+
+    cout << *a.getNext()->getNext() <<endl;
+    cout << *b.getNext()->getNext() <<endl; 
     return 0;
 }

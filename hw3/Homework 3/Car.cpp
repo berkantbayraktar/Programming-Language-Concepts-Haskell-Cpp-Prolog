@@ -17,6 +17,7 @@ Car::Car(const Car& rhs){ //WORKS WELL
     this->driver_name = rhs.driver_name;
     this->performance = rhs.performance;
     this->next = rhs.next;
+    this->head = NULL;
 
     Laptime *temp = rhs.head;
     Laptime *current;
@@ -39,13 +40,13 @@ Car::Car(const Car& rhs){ //WORKS WELL
 }
 
 Car::~Car(){
-    // Laptime *current = head;
-    // while(current != NULL){
-    //     Laptime *n = current->getNext();
-    //     delete current;
-    //     current = n;
-    // }
-    // head = NULL;
+    Laptime *current = head;
+    while(current != NULL){
+        Laptime *n = current->getNext();
+        delete current;
+        current = n;
+    }
+    head = NULL;
 }
 
 std::string Car::getDriverName() const{
@@ -194,4 +195,8 @@ long Car::getFastestLapTime()const{
         current = current->getNext();    
     }
     return fastest_laptime;
+}
+
+void Car::setPerformance(const double performance){
+    this->performance = performance;
 }

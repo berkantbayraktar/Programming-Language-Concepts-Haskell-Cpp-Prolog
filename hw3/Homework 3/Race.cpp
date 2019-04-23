@@ -10,7 +10,27 @@ const std::string driverList[13] = {"Ayrton Senna", "Michael Schumacher", "Jim C
  "Sebastian Vettel", "Lewis Hamilton", "Max Verstappen", "Kimi Raikonnen"};
 
 Race::Race(std::string race_name) : race_name(race_name), average_laptime(Utilizer::generateAverageLaptime()), head(NULL) {}
-Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.average_laptime),head(NULL){}
+Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.average_laptime),head(NULL){
+    Car *temp = rhs.head;
+    Car *current;
+    while(temp != NULL){
+        if(this->head == NULL){
+            Car *new_car = new Car(temp->getDriverName());
+            new_car->setPerformance(temp->getPerformance());
+            head = new_car;
+            current = head;
+            temp = temp->getNext();
+        }
+
+        else{
+            Car *new_car = new Car(temp->getDriverName());
+            new_car->setPerformance(temp->getPerformance());
+            current->addCar(new_car);
+            temp = temp->getNext();
+            current = current->getNext();
+        }
+    }
+}
 
 
 Race::~Race(){

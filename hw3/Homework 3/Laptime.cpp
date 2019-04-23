@@ -1,5 +1,5 @@
 #include "Laptime.h"
-
+#include <iostream>
 /*
 YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE 
@@ -11,16 +11,35 @@ Laptime::Laptime(int laptime){
     this->next = NULL;
 }
 
-Laptime::Laptime(const Laptime& rhs){
+Laptime::Laptime(const Laptime& rhs){ //WORKS WELL
     this->laptime = rhs.laptime;
-    this->next = rhs.next;
+    this->next = NULL;
+
+    Laptime *current;
+    Laptime *temp = rhs.next;
+    while(temp != NULL){
+        if(this->next == NULL){
+            std::cout <<"ifff"<<std::endl;
+            Laptime *new_laptime = new Laptime(temp->getLaptime());
+            next = new_laptime;
+            current = next;
+            temp = temp->getNext();
+        }
+        else{
+            std::cout <<"elseeee"<<std::endl;
+            Laptime *new_laptime = new Laptime(temp->getLaptime());
+            current->addLaptime(new_laptime);
+            temp = temp->getNext();
+            current = current->getNext();
+        }
+    }
 }
 
 Laptime::~Laptime(){
-    if(next != NULL){
-        delete next; 
-        next = NULL; 
-    }
+    // if(next != NULL){
+    //     delete next; 
+    //     next = NULL; 
+    // }
 }
 
 void Laptime::addLaptime(Laptime *next){

@@ -18,9 +18,9 @@ int main (){
     // (*mercedes).Lap(Utilizer::generateAverageLaptime());
     // (*mercedes).Lap(Utilizer::generateAverageLaptime());
     // (*mercedes).Lap(Utilizer::generateAverageLaptime());
-    Race *istanbul = new Race("istanbul");
+    Race istanbul = Race("istanbul");
     for(int i= 0 ; i < 10 ; i++){
-        (*istanbul).addCartoRace();
+        istanbul.addCartoRace();
     }
      
     // (*istanbul).addCartoRace(*ferrari);
@@ -28,18 +28,25 @@ int main (){
     // (*istanbul).addCartoRace(*yamaha);
     // (*istanbul).addCartoRace(*renault);
     // (*istanbul).addCartoRace(*opel);
-    cout << (*istanbul);
-    for(int i = 0 ; i < 3 ; i++){
-        ++(*istanbul);
-        cout << (*istanbul);
+    cout << istanbul;
+    for(int i = 0 ; i < 10 ; i++){
+        ++istanbul;
+        cout << istanbul;
     }
-    --(*istanbul);
-    cout << (*istanbul);
-    --(*istanbul);
-    cout << (*istanbul);
+    --istanbul;
+    cout << istanbul;
+    --istanbul;
+    cout << "ISTANBUL"<< endl;
+    cout << istanbul;
+    cout << "performance test:" << istanbul[9].getPerformance() << endl;
+
+    Race monaco = istanbul;
+    cout << "MONACO"<< endl;
+    cout << monaco;
+    cout << "performance test:" << monaco[9].getPerformance() << endl;
             
 
-    cout << "Number of cars in the race: " << (*istanbul).getNumberOfCarsinRace()  << endl; ;
+    cout << "Number of cars in the race: " << monaco.getNumberOfCarsinRace()  << endl; ;
    
     return 0;
 }
