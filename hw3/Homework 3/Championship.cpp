@@ -51,8 +51,40 @@ void Championship::addLap(std::string race_name){
  }
 
  std::ostream& operator<<(std::ostream& os, const Championship& championship){
-     for(unsigned int i = 0 ; i < championship.races.size() ; i++){
-         os << championship.races.at(i);
+    const int table[10] = {25,18,15,12,10,8,6,4,2,1};
+    std::vector<std::pair<std::string, int>> leaderboard;
+    std::vector<std::pair<std::string, int>> points;
+
+    Race first_race = championship.races.at(0);
+
+    for(int i = 0 ; i < first_race.getNumberOfCarsinRace() ; i++)
+        leaderboard.push_back(std::make_pair(first_race[i].getDriverName(),0));
+
+    for(unsigned int i = 0 ; i < championship.races.size() ; i++){
+        Race current = championship.races.at(i);
+        for(int i = 0 ; i < current.getNumberOfCarsinRace();i++){
+            points.push_back(std::make_pair(current[i].getDriverName(),i));
+        }
     }
+
+    for(unsigned int i = 0 ; i < points.size() ; i++){
+        for(unsigned int j = 0 ; j < leaderboard.size() ; j++){
+            if(points.at(i).first == leaderboard.at(j).first){
+                leaderboard.at(j).second += table[points.at(i).second];
+            }
+        }
+    }
+
+    std::sort(leaderboard.begin(), leaderboard.end(), [](const std::pair<std::string,int> &left, const std::pair<std::string,int> &right) {
+    return left.second > right.second;
+});
+
+    for(unsigned int i = 0; i < leaderboard.size(); i++){
+        os << i << "--" << leaderboard.at(i).first << "--" << leaderboard.at(i).second << std::endl ; 
+    }
+
+
+
+
     return os;
  }

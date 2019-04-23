@@ -11,7 +11,7 @@ int main(){
 
     Championship ikibinondokuz = Championship();
     Race istanbul = Race("istanbul");
-    for(int i= 0 ; i < 10 ; i++){
+    for(int i= 0 ; i < 5 ; i++){
         istanbul.addCartoRace();
     }
     
@@ -25,6 +25,11 @@ int main(){
         ikibinondokuz.addLap("izmir");
         ikibinondokuz.addLap("antalya");
     }
+
+    cout << ikibinondokuz["istanbul"] << endl;
+    cout << ikibinondokuz["ankara"] << endl;
+    cout << ikibinondokuz["izmir"] << endl;
+    cout << ikibinondokuz["antalya"] << endl;
 
     cout << ikibinondokuz << endl;
 
