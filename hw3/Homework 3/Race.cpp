@@ -10,7 +10,7 @@ const std::string driverList[13] = {"Ayrton Senna", "Michael Schumacher", "Jim C
  "Sebastian Vettel", "Lewis Hamilton", "Max Verstappen", "Kimi Raikonnen"};
 
 Race::Race(std::string race_name) : race_name(race_name), average_laptime(Utilizer::generateAverageLaptime()), head(NULL) {}
-Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.average_laptime),head(NULL){
+Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.average_laptime),head(NULL){ //WORKS WELL
     Car *temp = rhs.head;
     Car *current;
     while(temp != NULL){
@@ -302,4 +302,13 @@ int Race::indexOfTheFastestCar()const{ // returns index of the car which has the
         current = current->getNext();
     }
     return index;
+}
+
+void Race::setAverageLapTime(){
+    this->average_laptime = Laptime(Utilizer::generateAverageLaptime());
+}
+
+
+void Race::setRaceName(std::string race_name){
+    this->race_name = race_name;
 }

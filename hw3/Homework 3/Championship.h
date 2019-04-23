@@ -34,6 +34,15 @@ public:
     /**
      * Add a new Race to Championship. 
      * 
+     * @Important: Purpose of this function is to add the first race.
+     * 
+     * @param race Race to add
+     */
+    void addNewRace(Race& race);
+
+    /**
+     * Add a new Race to Championship. 
+     * 
      * @Important: You will use getAverageLaptime function for this
      * @Important: You can use copy constructor of the Race class in order
      * to just copy driver names for your new Race
@@ -51,6 +60,14 @@ public:
      * 
      */
     void removeRace(std::string race_name);
+
+    /**
+     * 
+     * Add lap to race with the given name
+     * 
+     * @param race_name you will find the race with this name and add a lap to it
+     */
+    void addLap(std::string race_name);
 
 
 
@@ -94,7 +111,7 @@ public:
      * @param car Car to be streamed.
      * @return The current Stream.
      */
-    friend std::ostream& operator<<(std::ostream& os, const Championship& car);
+    friend std::ostream& operator<<(std::ostream& os, const Championship& championship);
 
     // DO NOT MODIFY THE UPPER PART
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
