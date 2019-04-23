@@ -11,25 +11,25 @@ int main(){
 
     Championship ikibinondokuz = Championship();
     Race istanbul = Race("istanbul");
-    for(int i= 0 ; i < 5 ; i++){
+    for(int i= 0 ; i < 500; i++){
         istanbul.addCartoRace();
     }
     
     ikibinondokuz.addNewRace(istanbul);
-    ikibinondokuz.addNewRace("ankara");
-    ikibinondokuz.addNewRace("izmir");
-    ikibinondokuz.addNewRace("antalya");
+    // ikibinondokuz.addNewRace("ankara");
+    // ikibinondokuz.addNewRace("izmir");
+    // ikibinondokuz.addNewRace("antalya");
     for(int i= 0 ; i < 10 ; i++){
         ikibinondokuz.addLap("istanbul");
-        ikibinondokuz.addLap("ankara");
-        ikibinondokuz.addLap("izmir");
-        ikibinondokuz.addLap("antalya");
+        // ikibinondokuz.addLap("ankara");
+        // ikibinondokuz.addLap("izmir");
+        // ikibinondokuz.addLap("antalya");
     }
 
-    cout << ikibinondokuz["istanbul"] << endl;
-    cout << ikibinondokuz["ankara"] << endl;
-    cout << ikibinondokuz["izmir"] << endl;
-    cout << ikibinondokuz["antalya"] << endl;
+    cout << ikibinondokuz.getRace("istanbul") << endl;
+    // cout << ikibinondokuz.getRace("ankara") << endl;
+    // cout << ikibinondokuz.getRace("izmir") << endl;
+    // cout << ikibinondokuz.getRace("antalya") << endl;
 
     cout << ikibinondokuz << endl;
 

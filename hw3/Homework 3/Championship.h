@@ -115,6 +115,7 @@ public:
 
     // DO NOT MODIFY THE UPPER PART
     // ADD OWN PUBLIC METHODS/PROPERTIES BELOW
+    Race& getRace(std::string race_name);
 };
 
 #endif //HW3_CHAMPIONSHIP_H

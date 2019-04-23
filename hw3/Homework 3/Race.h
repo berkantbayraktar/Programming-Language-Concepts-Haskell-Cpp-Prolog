@@ -65,7 +65,7 @@ public:
      * @returns number of cars
      * 
      */
-    int getNumberOfCarsinRace()const;
+    int getNumberOfCarsinRace();
 
     /**
      * Return state of everything to desired lap's state
@@ -162,6 +162,7 @@ public:
     int indexOfTheFastestCar()const;
     void setAverageLapTime();
     void setRaceName(std::string race_name);
+    int getNumberOfCars()const;
 };
 
 

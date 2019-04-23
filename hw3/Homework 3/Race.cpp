@@ -5,9 +5,11 @@
 YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE 
 */
-const std::string driverList[13] = {"Ayrton Senna", "Michael Schumacher", "Jim Clark", "Juan Manuel Fangio" , "Fernando Alonso",
+const std::string driverList[29] = {"Ayrton Senna", "Michael Schumacher", "Jim Clark", "Juan Manuel Fangio" , "Fernando Alonso",
 "Alain Prost", "Jackie Stewart", "Emerson Fittipaldi", "Nelson Piquet",
- "Sebastian Vettel", "Lewis Hamilton", "Max Verstappen", "Kimi Raikonnen"};
+ "Sebastian Vettel", "Lewis Hamilton", "Max Verstappen", "Kimi Raikonnen", "Daniel Ricciardo", "Lando Norris",
+ "Romain Grosjean","Pierre Gasly", "Sergio Perez", "Charles Leclerc", "Lance Stroll", "Kevin Magnussen", "Alexander Albon",
+ "Daniil Kvyat", "Nico Hulkenberg", "Carlos Sainz", "George Russell", "Valtteri Bottas", "Robert Kubica", "Antonio Giovinazzi"};
 
 Race::Race(std::string race_name) : race_name(race_name), average_laptime(Utilizer::generateAverageLaptime()), head(NULL) {}
 Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.average_laptime),head(NULL){ //WORKS WELL
@@ -49,8 +51,10 @@ std::string Race::getRaceName()const{
 
 void Race::addCartoRace(){
     int index;
-    index = rand()%13;
+    index = rand()%29;
     std::string driver_name = driverList[index];
+    driver_name.push_back('a' + rand()%25);
+    driver_name.push_back('a' + rand()%25);
     Car *new_car = new Car(driver_name);
     Car *temp;
 
@@ -82,7 +86,7 @@ void Race::addCartoRace(Car& car){
     }
 }
 
-int Race::getNumberOfCarsinRace()const{
+int Race::getNumberOfCarsinRace(){
     Car *current = head;
     int numberOfCars = 0;
     
@@ -168,7 +172,7 @@ Race& Race::operator=(const Race& rhs){
 
 std::ostream& operator<<(std::ostream& os, const Race& race){
     Car *current = race.head;
-    int numberOfcars = race.getNumberOfCarsinRace();
+    int numberOfcars = race.getNumberOfCars();
     std::string str_numberOfcars = std::to_string(numberOfcars);
     int digit = str_numberOfcars.length();
     int indexFastestCar = race.indexOfTheFastestCar();
@@ -288,7 +292,7 @@ Car* Race::getCar(const int car_in_position){
 int Race::indexOfTheFastestCar()const{ // returns index of the car which has the fastest lap in the Race
     Car *current = (*this).head;
     long fastest_laptime = 0;
-    int numberOfcar = (*this).getNumberOfCarsinRace();
+    int numberOfcar = (*this).getNumberOfCars();
     int index = 0;
 
     if(current != NULL)
@@ -311,4 +315,15 @@ void Race::setAverageLapTime(){
 
 void Race::setRaceName(std::string race_name){
     this->race_name = race_name;
+}
+
+int Race::getNumberOfCars()const{
+    Car *current = head;
+    int numberOfCars = 0;
+    
+    while(current != NULL){
+        numberOfCars++;
+        current = current->getNext();
+    }
+    return numberOfCars;
 }

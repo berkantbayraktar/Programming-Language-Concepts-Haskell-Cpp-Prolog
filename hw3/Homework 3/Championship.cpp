@@ -70,7 +70,8 @@ void Championship::addLap(std::string race_name){
     for(unsigned int i = 0 ; i < points.size() ; i++){
         for(unsigned int j = 0 ; j < leaderboard.size() ; j++){
             if(points.at(i).first == leaderboard.at(j).first){
-                leaderboard.at(j).second += table[points.at(i).second];
+                if(points.at(i).second >= 0 && points.at(i).second <=9)
+                    leaderboard.at(j).second += table[points.at(i).second];
             }
         }
     }
@@ -80,11 +81,19 @@ void Championship::addLap(std::string race_name){
 });
 
     for(unsigned int i = 0; i < leaderboard.size(); i++){
-        os << i << "--" << leaderboard.at(i).first << "--" << leaderboard.at(i).second << std::endl ; 
+        os << i+1 << "--" << leaderboard.at(i).first << "--" << leaderboard.at(i).second << std::endl ; 
     }
 
 
 
 
     return os;
+ }
+
+
+ Race& Championship::getRace(std::string race_name){
+     for(unsigned int i = 0 ; i < races.size() ; i++){
+        if(races.at(i).getRaceName() == race_name)
+            return races.at(i);
+    }
  }

@@ -19,14 +19,12 @@ Laptime::Laptime(const Laptime& rhs){ //WORKS WELL
     Laptime *temp = rhs.next;
     while(temp != NULL){
         if(this->next == NULL){
-            std::cout <<"ifff"<<std::endl;
             Laptime *new_laptime = new Laptime(temp->getLaptime());
             next = new_laptime;
             current = next;
             temp = temp->getNext();
         }
         else{
-            std::cout <<"elseeee"<<std::endl;
             Laptime *new_laptime = new Laptime(temp->getLaptime());
             current->addLaptime(new_laptime);
             temp = temp->getNext();
@@ -36,10 +34,7 @@ Laptime::Laptime(const Laptime& rhs){ //WORKS WELL
 }
 
 Laptime::~Laptime(){
-    // if(next != NULL){
-    //     delete next; 
-    //     next = NULL; 
-    // }
+  
 }
 
 void Laptime::addLaptime(Laptime *next){
