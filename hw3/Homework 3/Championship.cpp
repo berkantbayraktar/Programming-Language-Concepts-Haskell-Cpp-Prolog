@@ -79,13 +79,19 @@ void Championship::addLap(std::string race_name){
     std::sort(leaderboard.begin(), leaderboard.end(), [](const std::pair<std::string,int> &left, const std::pair<std::string,int> &right) {
     return left.second > right.second;
 });
+    int digit = std::to_string(leaderboard.size()).length();
 
     for(unsigned int i = 0; i < leaderboard.size(); i++){
-        os << i+1 << "--" << leaderboard.at(i).first << "--" << leaderboard.at(i).second << std::endl ; 
+        size_t pos = leaderboard.at(i).first.find(" ");
+        std::string p = leaderboard.at(i).first.substr(pos+1,3);
+        for(int i = 0 ; i < int(p.length()) ; i++){
+            p [i] = toupper(p[i]);
+        }
+        os 
+        << std::setfill('0') << std::setw(digit) << i+1 
+        << "--" << p
+        << "--" << leaderboard.at(i).second << std::endl ; 
     }
-
-
-
 
     return os;
  }
