@@ -2,7 +2,9 @@
 #define HW3_UTILIZER_H
 
 #include <random>
-
+#include <iostream>
+#include <fstream>
+#include <string>
 
 // Use this class as-is.
 // Usage Example:
@@ -24,30 +26,72 @@ private:
 public:
 
     static double generatePerformance() {
-        std::random_device generator;
-        std::normal_distribution<double> distribution(1,0.3);
-        double number = distribution(generator);
-        return number;
+        static int line= 1;
+        int line_no = 0;
+        double value=0.0;
+        std::string sLine = "";
+        std::ifstream read;
+        std::size_t offset = 0;
+        read.open("performance.txt");
+
+        while (line_no != line && getline(read, sLine)) {
+            ++line_no;
+        }
+
+        if (line_no == line) {
+            value = std::stod(sLine,&offset);
+        } else {
+            std::cout<<"ERROR"<<std::endl;
+        }
+        line++;
+
+        
+        return value;
 
     }
     static int generateLaptimeVariance(double performance) {
-        std::random_device generator;
-        double std_var = 0.5;
-        std::normal_distribution<double> distribution(performance,std_var);
-        double number = distribution(generator);
-        return number*10000;
+        static int line= 1;
+        int line_no = 0;
+        int value;
+        std::string sLine = "";
+        std::ifstream read;
+        std::size_t offset = 0;
+        read.open("laptime_variance.txt");
+
+        while (line_no != line && getline(read, sLine)) {
+            ++line_no;
+        }
+
+        if (line_no == line) {
+            value = std::stoi(sLine,&offset);
+        } else {
+            std::cout<<"ERROR"<<std::endl;
+        }
+        line++;
+        return value;
+        
     }
 
     static int generateAverageLaptime() {
-        std::random_device generator;
-        std::normal_distribution<double> minute_distribution(4.0,1.0);
-        std::normal_distribution<double> second_distribution(30.0,15.0);
-        std::normal_distribution<double> milisecond_distribution(500.0,250.0);
-        double minute = minute_distribution(generator);
-        double second = second_distribution(generator);
-        double milisecond = milisecond_distribution(generator);
-        int my_time = int(minute) * 60000 + int(second) * 1000 + int(milisecond);
-        return my_time;
+        static int line= 1;
+        int line_no = 0;
+        int value = 0;
+        std::string sLine = "";
+        std::ifstream read;
+        std::size_t offset = 0;
+        read.open("average_laptimes.txt");
+        while (line_no != line && getline(read, sLine)) {
+            ++line_no;
+        }
+
+        if (line_no == line) {
+            value = std::stoi(sLine,&offset);
+        } else {
+            std::cout<<"ERROR"<<std::endl;
+        }
+        line++;
+        return value;
+        
     }
 };
 

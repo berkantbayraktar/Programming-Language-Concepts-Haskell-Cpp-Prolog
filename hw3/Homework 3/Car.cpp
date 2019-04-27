@@ -40,13 +40,13 @@ Car::Car(const Car& rhs){ //WORKS WELL
 }
 
 Car::~Car(){
-    Laptime *current = head;
-    while(current != NULL){
-        Laptime *n = current->getNext();
-        delete current;
-        current = n;
-    }
-    head = NULL;
+    // Laptime *current = head;
+    // while(current != NULL){
+    //     Laptime *n = current->getNext();
+    //     delete current;
+    //     current = n;
+    // }
+    // head = NULL;
 }
 
 std::string Car::getDriverName() const{
