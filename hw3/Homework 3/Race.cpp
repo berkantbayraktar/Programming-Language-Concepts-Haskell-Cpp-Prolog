@@ -17,16 +17,16 @@ Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.avera
     Car *current;
     while(temp != NULL){
         if(this->head == NULL){
-            Car *new_car = new Car(temp->getDriverName());
-            new_car->setPerformance(temp->getPerformance());
+            Car *new_car = new Car(*temp);
+            new_car->setHead(NULL);
             head = new_car;
             current = head;
             temp = temp->getNext();
         }
 
         else{
-            Car *new_car = new Car(temp->getDriverName());
-            new_car->setPerformance(temp->getPerformance());
+            Car *new_car = new Car(*temp);
+            new_car->setHead(NULL);
             current->addCar(new_car);
             temp = temp->getNext();
             current = current->getNext();
@@ -113,10 +113,8 @@ void Race::goBacktoLap(int lap){
 
 void Race::operator++(){
     Car *current = head;
-    while(current != NULL){
-        
-        current->Lap(Utilizer::generateAverageLaptime());
-        
+    while(current != NULL){   
+        current->Lap(average_laptime);  
         current = current-> getNext();
     }
     putCarsOrder();
@@ -242,8 +240,8 @@ std::ostream& operator<<(std::ostream& os, const Race& race){
                 os << "--" << "1"; 
         }
             
-
-        os << std::endl;
+        if(numberOfcars != rank)
+            os << std::endl;
         current = current ->getNext();
         rank++;
     }
@@ -308,8 +306,8 @@ int Race::indexOfTheFastestCar()const{ // returns index of the car which has the
     return index;
 }
 
-void Race::setAverageLapTime(){
-    this->average_laptime = Laptime(Utilizer::generateAverageLaptime());
+void Race::setAverageLapTime(int averageLaptime){
+    this->average_laptime = average_laptime;
 }
 
 

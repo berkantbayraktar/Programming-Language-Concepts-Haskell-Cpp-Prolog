@@ -200,3 +200,7 @@ long Car::getFastestLapTime()const{
 void Car::setPerformance(const double performance){
     this->performance = performance;
 }
+
+void Car::setHead(Laptime* head){
+    this->head = head;
+}

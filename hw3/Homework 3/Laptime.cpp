@@ -34,7 +34,6 @@ Laptime::Laptime(const Laptime& rhs){ //WORKS WELL
 }
 
 Laptime::~Laptime(){
-  
 }
 
 void Laptime::addLaptime(Laptime *next){

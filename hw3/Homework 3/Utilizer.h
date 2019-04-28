@@ -41,7 +41,7 @@ public:
         if (line_no == line) {
             value = std::stod(sLine,&offset);
         } else {
-            std::cout<<"ERROR"<<std::endl;
+            std::cout<<"ERRORgenePerformance"<<std::endl;
         }
         line++;
 
@@ -65,7 +65,7 @@ public:
         if (line_no == line) {
             value = std::stoi(sLine,&offset);
         } else {
-            std::cout<<"ERROR"<<std::endl;
+            std::cout<<"ERRORgenerateLaptimeVariance"<<std::endl;
         }
         line++;
         return value;
@@ -87,7 +87,7 @@ public:
         if (line_no == line) {
             value = std::stoi(sLine,&offset);
         } else {
-            std::cout<<"ERROR"<<std::endl;
+            std::cout<<"ERRORgenerateAverageLaptime"<<std::endl;
         }
         line++;
         return value;

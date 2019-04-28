@@ -136,6 +136,7 @@ public:
     int getNumberOfLaps();
     long getFastestLapTime()const;
     void setPerformance(const double performance);
+    void setHead(Laptime* head);
 };
 
 

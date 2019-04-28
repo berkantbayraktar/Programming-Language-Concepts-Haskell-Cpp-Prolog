@@ -80,7 +80,7 @@ public:
      * @param: race name
      * @returns the desired Race
      */
-    Race operator[](std::string race_name);
+    Race& operator[](std::string race_name);
 
     
     

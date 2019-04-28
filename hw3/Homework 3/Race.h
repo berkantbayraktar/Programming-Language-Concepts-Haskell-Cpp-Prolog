@@ -160,7 +160,7 @@ public:
     void putCarsOrder();
     Car* getCar(const int car_in_position);
     int indexOfTheFastestCar()const;
-    void setAverageLapTime();
+    void setAverageLapTime(int averageLaptime);
     void setRaceName(std::string race_name);
     int getNumberOfCars()const;
 };

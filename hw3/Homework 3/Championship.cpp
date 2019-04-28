@@ -1,4 +1,5 @@
 #include "Championship.h"
+#include "Utilizer.h"
 
 /*
 YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
@@ -22,10 +23,9 @@ void Championship::addNewRace(Race& race){
 
 void Championship::addNewRace(std::string race_name){
     Race new_race = *races.begin();
-    new_race.setAverageLapTime();
+    new_race.setAverageLapTime(Utilizer::generateAverageLaptime());
     new_race.setRaceName(race_name);
     races.push_back(new_race);
-    
 }
 
 void Championship::removeRace(std::string race_name){
@@ -38,14 +38,19 @@ void Championship::removeRace(std::string race_name){
 void Championship::addLap(std::string race_name){
     for(unsigned int i = 0 ; i < races.size() ; i++){
         if(races.at(i).getRaceName() == race_name)
+        {   
             ++races.at(i);
+        }
     }
 }
 
- Race Championship::operator[](std::string race_name){
+ Race& Championship::operator[](std::string race_name){
     for(unsigned int i = 0 ; i < races.size() ; i++){
         if(races.at(i).getRaceName() == race_name)
+        {
             return races.at(i);
+        }
+            
     }
 
  }
@@ -74,6 +79,18 @@ void Championship::addLap(std::string race_name){
                     leaderboard.at(j).second += table[points.at(i).second];
             }
         }
+    }
+
+    for(unsigned int i = 0 ; i < championship.races.size() ; i++){
+        int indexOfTheFastestCar = championship.races.at(i).indexOfTheFastestCar();
+        for(int j = 0 ; j < first_race.getNumberOfCarsinRace() ; j++){
+            Race current = championship.races.at(i);
+            if(leaderboard.at(j).first == current.getCar(indexOfTheFastestCar)->getDriverName()){
+                if(indexOfTheFastestCar >= 0 && indexOfTheFastestCar <= 9)
+                    leaderboard.at(j).second += 1;
+            }
+        }
+
     }
 
     std::sort(leaderboard.begin(), leaderboard.end(), [](const std::pair<std::string,int> &left, const std::pair<std::string,int> &right) {
