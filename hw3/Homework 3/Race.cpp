@@ -36,13 +36,7 @@ Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.avera
 
 
 Race::~Race(){
-    // Car *current = head ;
-    // while(current != NULL){
-    //     Car *n = current->getNext();
-    //     delete current;
-    //     current = n;
-    // }
-    // delete head;
+    
 }
 
 std::string Race::getRaceName()const{

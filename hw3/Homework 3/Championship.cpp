@@ -15,7 +15,7 @@ Championship::Championship(const Championship& rhs){
 }
 
 Championship::~Championship(){
-
+    
 }
 void Championship::addNewRace(Race& race){
     races.push_back(race);
