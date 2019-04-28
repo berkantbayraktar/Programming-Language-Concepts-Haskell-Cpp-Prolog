@@ -36,7 +36,7 @@ Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.avera
 
 
 Race::~Race(){
-    
+    head = NULL;
 }
 
 std::string Race::getRaceName()const{

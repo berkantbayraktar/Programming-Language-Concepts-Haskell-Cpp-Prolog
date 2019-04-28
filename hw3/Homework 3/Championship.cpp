@@ -15,7 +15,8 @@ Championship::Championship(const Championship& rhs){
 }
 
 Championship::~Championship(){
-    
+    races.clear();
+    races.shrink_to_fit();
 }
 void Championship::addNewRace(Race& race){
     races.push_back(race);

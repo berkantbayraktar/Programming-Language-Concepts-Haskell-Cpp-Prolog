@@ -81,5 +81,8 @@ int main(){
 
     cout << *a.getNext()->getNext() <<endl;
     cout << *b.getNext()->getNext() <<endl; 
+    delete c;
+    delete d;
+    delete f;
     return 0;
 }

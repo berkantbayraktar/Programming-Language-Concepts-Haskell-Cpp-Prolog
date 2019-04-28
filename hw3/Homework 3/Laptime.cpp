@@ -17,15 +17,16 @@ Laptime::Laptime(const Laptime& rhs){ //WORKS WELL
 
     Laptime *current;
     Laptime *temp = rhs.next;
+    Laptime *new_laptime;
     while(temp != NULL){
         if(this->next == NULL){
-            Laptime *new_laptime = new Laptime(temp->getLaptime());
+            new_laptime = temp;
             next = new_laptime;
             current = next;
             temp = temp->getNext();
         }
         else{
-            Laptime *new_laptime = new Laptime(temp->getLaptime());
+            new_laptime = temp;
             current->addLaptime(new_laptime);
             temp = temp->getNext();
             current = current->getNext();
