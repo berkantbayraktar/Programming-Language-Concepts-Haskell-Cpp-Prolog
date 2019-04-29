@@ -137,6 +137,7 @@ public:
     long getFastestLapTime()const;
     void setPerformance(const double performance);
     void setHead(Laptime* head);
+    Laptime getLaptime(const int lap);
 };
 
 

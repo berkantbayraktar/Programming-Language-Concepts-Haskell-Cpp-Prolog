@@ -19,7 +19,16 @@ Championship::~Championship(){
     races.shrink_to_fit();
 }
 void Championship::addNewRace(Race& race){
+    std::string race_name = race.getRaceName();
     races.push_back(race);
+    for(unsigned int i = 0 ; i < races.size() ; i++){
+        if(races.at(i).getRaceName() == race_name)
+        {
+            races.at(i).setHead(race.getHead());
+        }
+            
+    }
+ 
 }
 
 void Championship::addNewRace(std::string race_name){

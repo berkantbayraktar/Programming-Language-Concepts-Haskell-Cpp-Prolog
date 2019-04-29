@@ -157,9 +157,9 @@ Car Race::operator[](std::string driver_name){
 }
 
 Race& Race::operator=(const Race& rhs){
-    Race temp(rhs);
-    std::swap(temp.head,head);
-    return *this;
+    this->race_name = rhs.race_name;
+    this->average_laptime = rhs.average_laptime;
+    this->head = rhs.head;
 }
 
 std::ostream& operator<<(std::ostream& os, const Race& race){
@@ -301,7 +301,8 @@ int Race::indexOfTheFastestCar()const{ // returns index of the car which has the
 }
 
 void Race::setAverageLapTime(int averageLaptime){
-    this->average_laptime = average_laptime;
+    Laptime avg = Laptime(averageLaptime);
+    this->average_laptime = avg;
 }
 
 
@@ -318,4 +319,16 @@ int Race::getNumberOfCars()const{
         current = current->getNext();
     }
     return numberOfCars;
+}
+
+void Race::setHead(Car* head){
+    this->head = head;
+}
+
+Car* Race::getHead(){
+    return head;
+}
+
+Laptime Race::getAverageLapTime(){
+    return average_laptime;
 }

@@ -161,8 +161,11 @@ public:
     Car* getCar(const int car_in_position);
     int indexOfTheFastestCar()const;
     void setAverageLapTime(int averageLaptime);
+    Laptime getAverageLapTime();
     void setRaceName(std::string race_name);
     int getNumberOfCars()const;
+    void setHead(Car* head);
+    Car* getHead();
 };
 
 

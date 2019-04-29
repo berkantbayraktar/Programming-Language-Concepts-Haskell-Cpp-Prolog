@@ -34,15 +34,15 @@ int main (){
         cout << istanbul;
     }
     --istanbul;
-    cout << istanbul;
+    cout << istanbul << endl;;
     --istanbul;
     cout << "ISTANBUL"<< endl;
-    cout << istanbul;
+    cout << istanbul<< endl;
     cout << "performance test:" << istanbul[9].getPerformance() << endl;
 
     Race monaco = istanbul;
     cout << "MONACO"<< endl;
-    cout << monaco;
+    cout << monaco <<endl;
     cout << "performance test:" << monaco[9].getPerformance() << endl;
             
 

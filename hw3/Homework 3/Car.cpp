@@ -207,3 +207,18 @@ void Car::setPerformance(const double performance){
 void Car::setHead(Laptime* head){
     this->head = head;
 }
+
+
+Laptime Car::getLaptime(const int lap)  {
+    Laptime *temp = head;
+    
+    for(int i = 0 ; i < lap ; i++)
+    {
+        temp = temp->getNext();
+        if(temp == NULL){
+            temp = new Laptime(0);
+            break;
+        }
+    }
+    return *temp;
+}
