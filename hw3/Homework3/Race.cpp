@@ -37,12 +37,7 @@ Race::Race(const Race& rhs) : race_name(rhs.race_name),average_laptime(rhs.avera
 
 
 Race::~Race(){
-    Car *current = head;
-    while(current != NULL){
-        Car *n = current->getNext();
-        delete current;
-        current = n;
-    }
+    
 }
 
 std::string Race::getRaceName()const{
@@ -50,11 +45,13 @@ std::string Race::getRaceName()const{
 }
 
 void Race::addCartoRace(){
+    
     int index;
     index = rand()%29;
     std::string driver_name = driverList[index];
-    driver_name.push_back('a' + rand()%25);
-    driver_name.push_back('a' + rand()%25);
+    size_t pos = driver_name.find(" ");
+    driver_name.insert(driver_name.begin()+ pos+1, 'a' + rand()%25);
+    driver_name.insert(driver_name.begin()+ pos+1, 'a' + rand()%25);
     Car *new_car = new Car(driver_name);
     Car *temp;
 

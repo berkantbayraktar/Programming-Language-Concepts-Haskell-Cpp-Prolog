@@ -58,6 +58,15 @@ int main(void) {
     baku.addCartoRace(ricciardo);
     baku.addCartoRace(raikkonen);
     baku.addCartoRace(giovinazzi);
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
+    baku.addCartoRace();
     
     cout<<"NUMBER OF CARS"<<endl<<endl;
     cout<<baku.getNumberOfCarsinRace()<<endl;
@@ -101,41 +110,37 @@ int main(void) {
     for(int i = 0; i<25 ;i++) {
         champ.addLap("china");
     }
+    cout<<"first without istanbul Overall Championship Results"<<endl<<endl;
+    cout<<champ<<endl;
+
+
+    cout<<"ADDING NEW RACE Istanbul"<<endl<<endl;
+    champ.addNewRace("istanbul");
+    for(int i = 0; i<25 ;i++) {
+        champ.addLap("istanbul");
+    }
+
     cout<<"China RACE RESULST"<<endl<<endl;
     cout<<champ["china"]<<endl<<endl;
 
-    cout<<"Bakü RACE RESULST"<<endl<<endl;
+    cout<<"Baku RACE RESULST"<<endl<<endl;
     cout<<champ["baku"]<<endl<<endl;
+   
+
+    cout<<"Istanbul RACE RESULST"<<endl<<endl;
+    cout<<champ["istanbul"]<<endl<<endl;
 
 
-    for(int i = 0;i<3;i++) {
-        ++baku;
+    cout<<"with Istanbul Overall Championship Results"<<endl<<endl;
+    cout<<champ<<endl;
+
+    for(int i = 0 ; i < 20 ; i++){
+        std::cout <<  baku[i].getDriverName() << std::endl;
     }
 
+    champ.removeRace("istanbul");
 
-
-
-
-    // cout<<"Overall Championship Results"<<endl<<endl;
-    // cout<<champ<<endl;
-
-
-    // cout<<"ADDING NEW RACE Istanbul"<<endl<<endl;
-    // champ.addNewRace("istanbul");
-    // for(int i = 0; i<25 ;i++) {
-    //     champ.addLap("istanbul");
-    // }
-
-    // cout<<"China RACE RESULST"<<endl<<endl;
-    // cout<<champ["china"]<<endl<<endl;
-
-    // cout<<"Baku RACE RESULST"<<endl<<endl;
-    // cout<<champ["baku"]<<endl<<endl;
-
-    // cout<<"Istanbul RACE RESULST"<<endl<<endl;
-    // cout<<champ["istanbul"]<<endl<<endl;
-
-    cout<<"Overall Championship Results"<<endl<<endl;
+    cout<<"without istanbul Overall Championship Results"<<endl<<endl;
     cout<<champ<<endl;
 
     cout<<"END OF TEST"<<endl;
