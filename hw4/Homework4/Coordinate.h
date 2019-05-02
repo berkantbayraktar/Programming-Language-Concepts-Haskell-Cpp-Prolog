@@ -44,3 +44,5 @@ struct Coordinate {
         return abs(x - rhs.x) + abs(y - rhs.y);
     }
 };
+
+#endif

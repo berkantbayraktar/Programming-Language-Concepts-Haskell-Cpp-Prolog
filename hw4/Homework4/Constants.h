@@ -1,5 +1,5 @@
 #ifndef HW4_CONSTANTS_H
-#define HW+_CONSTANTS_H
+#define HW4_CONSTANTS_H
 
 enum Team{
 	BARBARIANS,
