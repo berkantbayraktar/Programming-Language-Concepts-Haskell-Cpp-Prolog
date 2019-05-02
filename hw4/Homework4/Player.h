@@ -17,9 +17,6 @@ protected:
 	//DO NOT MODIFY THE UPPER PART
 	//ADD YOU OWN PROVATE METHODS/PROPERTIES BELOW
 
-	// const int attackDamage;
-	// const int healPower;
-	// const int maxHP;
 	std::vector<Goal> goalPriority;
 
 public:
