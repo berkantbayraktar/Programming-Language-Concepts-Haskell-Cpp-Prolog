@@ -15,6 +15,13 @@ class Archer : public Player{
    * its coordinate.
    *
    */
+  public:
+    Archer(uint _id , int _x , int _y , Team _team);
+    int getAttackDamage() const;
+    int getHealPower() const;
+    int getMaxHP() const;
+    const std::string getClassAbbreviation() const;
+    std::vector<Coordinate> getAttackableCoordinates();
 };
 
 #endif

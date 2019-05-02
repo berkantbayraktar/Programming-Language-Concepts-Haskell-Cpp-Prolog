@@ -20,20 +20,26 @@ IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 const std::vector<Coordinate> moveOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
 const std::vector<Coordinate> healOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
 
+Priest::Priest(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, team){
+    this->HP = this->getMaxHP();
+    goalPriority.push_back(HEAL);
+    goalPriority.push_back(TO_ALLY);
+    goalPriority.push_back(CHEST);
+}
 
-int Player::getAttackDamage() const{
+int Priest::getAttackDamage() const{
     return 0;
 }
 
-int Player::getHealPower() const{
+int Priest::getHealPower() const{
     return 50;
 }
 
-int Player::getMaxHP() const{
+int Priest::getMaxHP() const{
     return 150;
 }
 
-const std::string Player::getClassAbbreviation() const{
+const std::string Priest::getClassAbbreviation() const{
     if(team == BARBARIANS)
         return "PR";
 
@@ -41,7 +47,7 @@ const std::string Player::getClassAbbreviation() const{
         return "pr";
 }
 
-std::vector<Coordinate> Player::getMoveableCoordinates(){
+std::vector<Coordinate> Priest::getMoveableCoordinates(){
     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : moveOffsets){
@@ -50,7 +56,7 @@ std::vector<Coordinate> Player::getMoveableCoordinates(){
     return moveableCoordinates;
 }
 
-std::vector<Coordinate> Player::getHealableCoordinates(){
+std::vector<Coordinate> Priest::getHealableCoordinates(){
     std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : healOffsets){

@@ -18,19 +18,24 @@ static const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordina
    *
    */
 
-int Player::getAttackDamage() const{
+Archer::Archer(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, team){
+    this->HP = this->getMaxHP();
+    goalPriority.push_back(ATTACK);
+}
+
+int Archer::getAttackDamage() const{
     return 50;
 }
 
-int Player::getHealPower() const{
+int Archer::getHealPower() const{
     return 0;
 }
 
-int Player::getMaxHP() const{
+int Archer::getMaxHP() const{
     return 200;
 }
 
-const std::string Player::getClassAbbreviation() const{
+const std::string Archer::getClassAbbreviation() const{
     if(team == BARBARIANS)
         return "AR";
 
@@ -38,7 +43,7 @@ const std::string Player::getClassAbbreviation() const{
         return "ar";
 }
 
-std::vector<Coordinate> Player::getAttackableCoordinates(){
+std::vector<Coordinate> Archer::getAttackableCoordinates(){
     std::vector<Coordinate> attackableCoordinates = std::vector<Coordinate>();
 
     for(Coordinate offset : attackOffsets){
@@ -48,13 +53,13 @@ std::vector<Coordinate> Player::getAttackableCoordinates(){
     return attackableCoordinates;
 }
 
-// std::vector<Coordinate> Player::getMoveableCoordinates(){
+// std::vector<Coordinate> Archer::getMoveableCoordinates(){
 //     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
 //     return moveableCoordinates;
 // }
 
-// std::vector<Coordinate> Player::getHealableCoordinates(){
+// std::vector<Coordinate> Archer::getHealableCoordinates(){
 //     std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
 
 //     return healableCoordinates;

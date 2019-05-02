@@ -35,6 +35,14 @@ std::string Player::getBoardID(){
         return str_id;  
 }
 
+std::vector<Goal> Player::getGoalPriorityList(){
+    return goalPriority;
+}
+
+const std::string Player::getClassAbbreviation() const{
+    return "";
+}
+
 bool Player::attack(Player *enemy){
     enemy->HP -= this->getAttackDamage();
     std::cout<< "Player " << this->getBoardID() << " attacked " << "Player " << enemy->getBoardID() << " (" << this->getAttackDamage() << ")" << std::endl;  // "Player 01 attacked Player 05 (75)"
@@ -65,6 +73,10 @@ std::vector<Coordinate> Player::getHealableCoordinates(){
     std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
 
     return healableCoordinates;
+}
+
+void Player::movePlayerToCoordinate(Coordinate c){
+    // IMPLEMENT
 }
 
 bool Player::isDead() const{

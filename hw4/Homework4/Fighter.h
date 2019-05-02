@@ -14,6 +14,14 @@ class Fighter : public Player{
    * Can attack to adjacent up, down, left or right square
    *
    */
+  public:
+    Fighter(uint _id , int _x , int _y , Team _team);
+    int getAttackDamage() const;
+    int getHealPower() const;
+    int getMaxHP() const;
+    const std::string getClassAbbreviation() const;
+    std::vector<Coordinate> getAttackableCoordinates();
+    std::vector<Coordinate> getMoveableCoordinates();
 };
 
 #endif

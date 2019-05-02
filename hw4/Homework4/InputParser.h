@@ -26,6 +26,10 @@ public:
    * @returns Pointer to the Dynamically allocated Game object
    */
   static Game* parseGame();
+
+  ///////// ATTENTIONNNNNNNNNNNNNNN
+  public:
+    static Team convertStringToEnum(std::string s);
 };
 
 #endif

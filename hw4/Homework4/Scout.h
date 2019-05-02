@@ -14,9 +14,14 @@ class Scout : public Player{
    * Can attack all adjacent squares, including diagonals.
    *
    */
-  private:
-    const std::vector<Coordinate> moveOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
-    const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
+  public:
+    Scout(uint _id , int _x , int _y , Team _team);
+    int getAttackDamage() const;
+    int getHealPower() const;
+    int getMaxHP() const;
+    const std::string getClassAbbreviation() const;
+    std::vector<Coordinate> getAttackableCoordinates();
+    std::vector<Coordinate> getMoveableCoordinates();
 };
 
 #endif

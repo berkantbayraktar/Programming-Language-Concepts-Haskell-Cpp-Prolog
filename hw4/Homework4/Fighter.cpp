@@ -19,19 +19,26 @@ IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 const std::vector<Coordinate> moveOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1)};
 const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1)};
 
-int Player::getAttackDamage() const{
+Fighter::Fighter(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, team){
+    this->HP = this->getMaxHP();
+    goalPriority.push_back(ATTACK);
+    goalPriority.push_back(TO_ENEMY);
+    goalPriority.push_back(CHEST);
+}
+
+int Fighter::getAttackDamage() const{
     return 100;
 }
 
-int Player::getHealPower() const{
+int Fighter::getHealPower() const{
     return 0;
 }
 
-int Player::getMaxHP() const{
+int Fighter::getMaxHP() const{
     return 400;
 }
 
-const std::string Player::getClassAbbreviation() const{
+const std::string Fighter::getClassAbbreviation() const{
     if(team == BARBARIANS)
         return "FI";
 
@@ -39,7 +46,7 @@ const std::string Player::getClassAbbreviation() const{
         return "fi";
 }
 
-std::vector<Coordinate> Player::getAttackableCoordinates(){
+std::vector<Coordinate> Fighter::getAttackableCoordinates(){
     std::vector<Coordinate> attackableCoordinates = std::vector<Coordinate>();
 
     for(Coordinate offset : attackOffsets){
@@ -49,7 +56,7 @@ std::vector<Coordinate> Player::getAttackableCoordinates(){
     return attackableCoordinates;
 }
 
-std::vector<Coordinate> Player::getMoveableCoordinates(){
+std::vector<Coordinate> Fighter::getMoveableCoordinates(){
     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : moveOffsets){

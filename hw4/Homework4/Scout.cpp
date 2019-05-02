@@ -20,19 +20,26 @@ IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 const std::vector<Coordinate> moveOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
 const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
 
-int Player::getAttackDamage() const{
+Scout::Scout(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, team){
+    this->HP = this->getMaxHP();
+    goalPriority.push_back(CHEST);
+    goalPriority.push_back(TO_ALLY);
+    goalPriority.push_back(ATTACK);
+}
+
+int Scout::getAttackDamage() const{
     return 25;
 }
 
-int Player::getHealPower() const{
+int Scout::getHealPower() const{
     return 0;
 }
 
-int Player::getMaxHP() const{
+int Scout::getMaxHP() const{
     return 125;
 }
 
-const std::string Player::getClassAbbreviation() const{
+const std::string Scout::getClassAbbreviation() const{
     if(team == BARBARIANS)
         return "SC";
 
@@ -40,7 +47,7 @@ const std::string Player::getClassAbbreviation() const{
         return "sc";
 }
 
-std::vector<Coordinate> Player::getAttackableCoordinates(){
+std::vector<Coordinate> Scout::getAttackableCoordinates(){
     std::vector<Coordinate> attackableCoordinates = std::vector<Coordinate>();
 
     for(Coordinate offset : attackOffsets){
@@ -50,7 +57,7 @@ std::vector<Coordinate> Player::getAttackableCoordinates(){
     return attackableCoordinates;
 }
 
-std::vector<Coordinate> Player::getMoveableCoordinates(){
+std::vector<Coordinate> Scout::getMoveableCoordinates(){
     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : moveOffsets){

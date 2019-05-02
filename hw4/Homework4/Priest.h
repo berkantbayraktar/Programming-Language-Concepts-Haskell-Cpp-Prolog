@@ -14,6 +14,14 @@ class Priest : public Player{
    * Can heal all adjacent squares, including diagonals.
    *
    */
+  public:
+    Priest(uint _id , int _x , int _y , Team _team);
+    int getAttackDamage() const;
+    int getHealPower() const;
+    int getMaxHP() const;
+    const std::string getClassAbbreviation() const;
+    std::vector<Coordinate> getHealableCoordinates();
+    std::vector<Coordinate> getMoveableCoordinates();
 };
 
 #endif
