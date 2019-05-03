@@ -27,12 +27,19 @@ Team Player::getTeam() const{
 }
 
 std::string Player::getBoardID(){
+    
     std::string str_id = std::to_string(id);
     int length = str_id.length();
-    if(length = 1)
+    
+    if(length == 1){
+        
         return std::to_string(0) + str_id;
-    else
-        return str_id;  
+    }
+        
+    else{ 
+        return str_id;
+    }
+          
 }
 
 std::vector<Goal> Player::getGoalPriorityList(){
@@ -40,7 +47,7 @@ std::vector<Goal> Player::getGoalPriorityList(){
 }
 
 const std::string Player::getClassAbbreviation() const{
-    return "";
+    return "XD";
 }
 
 bool Player::attack(Player *enemy){

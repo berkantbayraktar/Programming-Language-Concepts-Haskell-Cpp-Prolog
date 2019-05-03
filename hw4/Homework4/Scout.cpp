@@ -20,7 +20,7 @@ IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 const std::vector<Coordinate> moveOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
 const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1), Coordinate(1,0), Coordinate(0,-1), Coordinate(-1,-1), Coordinate(-1,1), Coordinate(1,1), Coordinate(1,-1)};
 
-Scout::Scout(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, team){
+Scout::Scout(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, _team){
     this->HP = this->getMaxHP();
     goalPriority.push_back(CHEST);
     goalPriority.push_back(TO_ALLY);

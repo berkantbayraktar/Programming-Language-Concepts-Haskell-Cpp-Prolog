@@ -4,8 +4,9 @@
 int main (){
 //Game(uint maxTurnNumber, uint boardSize, Coordinate chest);
     Coordinate c = Coordinate(10,10);
-    Game *g = new Game(100, 50,c  );
+    Game *g ;
     g = InputParser::parseGame();
-
+    g->board.printBoardwithClass();
+    g->board.printBoardwithID();
     return 0;
 }

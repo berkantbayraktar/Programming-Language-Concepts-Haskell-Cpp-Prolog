@@ -5,7 +5,7 @@
 class Game{
 
 private:
-  Board board;
+  
   uint turnNumber;
   uint maxTurnNumber;
   std::vector<Player*> players;
@@ -14,6 +14,7 @@ private:
 	//ADD YOU OWN PROVATE METHODS/PROPERTIES BELOW
 
 public:
+  Board board;
   /**
    * Costructor for Game class.
    * Game manages the memory allocated for future contents the vector (added players).
@@ -33,9 +34,11 @@ public:
    * @param x x coordinate of the new player.
    * @param y y coordinate of the new player.
    * @param team team of the new player.
+   * @param class class of the new player as string, One of "ARCHER", "FIGHTER",
+   * "PRIEST", "SCOUT", "TANK".
    *
    */
-  void addPlayer(int id, int x, int y, Team team );
+  void addPlayer(int id, int x, int y, Team team, std::string c);
 
   /**
    * The game ends when either of these happens:

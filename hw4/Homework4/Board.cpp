@@ -5,7 +5,12 @@ YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 */
 
-Board::Board(uint _size, std::vector<Player*>* _players, Coordinate chest): size(size), players(_players), chest(chest)  {}
+Board::Board(uint _size, std::vector<Player*>* _players, Coordinate chest): size(_size), players(_players), chest(chest){
+}
+
+Board::~Board(){
+    //IMPLEMENT
+}
 
 bool Board::isCoordinateInBoard(const Coordinate& c){
     return ((c.x >= 0 && c.x < size) && (c.y >= 0 && c.y < size));
@@ -35,32 +40,35 @@ void Board::printBoardwithID(){
     for(int j = 0 ; j < size ; j++){
         for(int i = 0 ; i < size ; i++){
             Coordinate temp = Coordinate(i,j);
-            if((*this)[temp] == NULL){
-                std::cout << "__ " << std::endl;
+            if(this->getChestCoordinates() == temp){
+                std::cout << "Ch ";
             }
-            else if(this->getChestCoordinates() == temp){
-                std::cout << "Ch " << std::endl;
+            else if((*this)[temp] == NULL){
+                std::cout << "__ ";
             }
             else{
-                std::cout << (*this)[temp]->getBoardID() << " " << std::endl;
+                std::cout << (*this)[temp]->getBoardID() << " " ;
             }
         }
+        std::cout << std::endl;
     }
 }
 
 void Board::printBoardwithClass(){
+    
     for(int j = 0 ; j < size ; j++){
         for(int i = 0 ; i < size ; i++){
             Coordinate temp = Coordinate(i,j);
-            if((*this)[temp] == NULL){
-                std::cout << "__ " << std::endl;
+            if(this->getChestCoordinates() == temp){
+                std::cout << "Ch ";
             }
-            else if(this->getChestCoordinates() == temp){
-                std::cout << "Ch " << std::endl;
+            else if((*this)[temp] == NULL){
+                std::cout << "__ ";
             }
             else{
-                std::cout << (*this)[temp]->getClassAbbreviation() << " " << std::endl;
+                std::cout << (*this)[temp]->getClassAbbreviation() << " ";
             }
         }
+        std::cout << std::endl;
     }
 }

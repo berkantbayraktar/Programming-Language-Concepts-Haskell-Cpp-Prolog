@@ -18,7 +18,7 @@ static const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordina
    *
    */
 
-Archer::Archer(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, team){
+Archer::Archer(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, _team){
     this->HP = this->getMaxHP();
     goalPriority.push_back(ATTACK);
 }

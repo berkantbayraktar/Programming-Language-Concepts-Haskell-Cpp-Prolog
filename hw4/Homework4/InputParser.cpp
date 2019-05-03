@@ -36,19 +36,15 @@ Game* InputParser::parseGame(){
     for(int i = 0 ; i < numberOfPlayers ; i++){
         uint id; std::string playerClass, teamName; int x; int y;
 
-        std::cin >> id >> playerClass >> teamName >> x >> y;   
-
-        // if(playerClass == "ARCHER")
-        // else if (playerClass == "FIGHTER")
-        // else if (playerClass == "PRIEST")
-        // else if (playerClass == "SCOUT")
-        // else if (playerClass == "TANK")
-        
-        g->addPlayer(id, x, y, convertStringToEnum(teamName));    
+        std::cin >> id >> playerClass >> teamName >> x >> y; 
+       
+        g->addPlayer(id, x, y, convertStringToEnum(teamName), playerClass);    
     }
+    return g;
 }
 
 Team InputParser::convertStringToEnum(std::string s){
+  
     if(s == "BARBARIAN")
         return BARBARIANS;
     else if (s == "KNIGHT")
