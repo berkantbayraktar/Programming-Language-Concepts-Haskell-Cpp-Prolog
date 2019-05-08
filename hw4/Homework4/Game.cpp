@@ -96,5 +96,84 @@ void Game::playTurn(){
 }
 
 Goal Game::playTurnForPlayer(Player* player){
-    std::cout << "playerID : "  << player->getID() << std::endl;
+    if(player->getHP() <= 0){
+        std::cout << "Player " << player->getBoardID() << " died." << std::endl;
+        delete player;
+        player = NULL;
+    }
+    
+    for(Goal goal : player->getGoalPriorityList()){
+        if(goal == ATTACK){
+            for(Coordinate attackableCoordinate : player->getAttackableCoordinates())
+        }
+        else if(goal == HEAL){
+
+        }
+        else if (goal == TO_ALLY){
+
+        }
+        else if (goal == TO_ENEMY){
+
+        }
+        else if (goal == CHEST){
+
+        }
+    }
+
+    return NO_GOAL;
+
+    /**
+   * Play a turn for the given player.
+   * If the player is dead announce its death by printing the boardID of the player
+   * as in "Player 07 died.". Remove that player from the board and release its resources.
+   *
+   * Each player has a goal list sorted by its priority for that player.
+   * When a player plays a turn it iterates over its goal list and tries to take
+   * an action. Valid actions are attack, move and heal. A player can take only
+   * one action in a turn, and if there is no action it can take it stops and does nothing.
+   * Before moving a player you must check if the coordinate to move is valid.
+   * Meaning that, the coordinate is in the bounds of the board and there are no
+   * players there.
+   *
+   * IMPORTANT NOTE: every usage of the word nearest is referencing smallest the manhattan
+   * distance, which is formulated as (abs(x_1-x_2) + abs(y_1-y_2)). operator-
+   * overloaded in Coordinate.h computes exactly that, so you can use that method to
+   * calculate the distance between two coordinates.
+   *
+   * Below are the explanations for goals:
+   *
+   * ATTACK:
+   *   - If there are any enemies in the attack range of the player attack to it.
+   *     If there are more than 1 enemy in the range attack to the one with
+   *     lowest ID. If there is no one to attack try the next goal.
+   *
+   * CHEST:
+   *   - Move to the direction of the chest, if both vertical and horizontal moves
+   *     are available, pick the horizontal one. If the horizontal move is blocked
+   *     but the vertical move is not, move vertically. If all directions towards
+   *     the chest is blocked try the next goal.
+   *
+   * TO_ENEMY:
+   *   - Move towards the nearest enemy. If there are more than one enemies with the same distance
+   *     move towards the one with the smallest ID. If both vertical and horizontal moves
+   *     are available, pick the horizontal one. If an enemy is in the squares
+   *     that the player can move or every move that brings the player closer to
+   *     the selected enemy is blocked, try the next goal.
+   *
+   * TO_ALLY:
+   *   - Move towards the nearest ally. If there are more than one allies with the same distance
+   *     move towards the one with the smallest ID.  If both vertical and horizontal moves
+   *     are available, pick the horizontal one. If an ally is in the squares
+   *     that the player can move or every move that brings the player closer to
+   *     the selected ally is blocked, try the next goal.
+   *
+   * HEAL:
+   *   - If there are any allies in the healing range heal all of them. if there
+   *     is no one to heal try the next goal.
+   *
+   *
+   * @return the goal that the action was taken upon. NO_GOAL if no action was taken.
+   */
+    
+    
 }

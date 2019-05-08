@@ -1,6 +1,14 @@
 #include <iostream>
 #include "Game.h"
 #include "InputParser.h"
+/** 
+ * @author Berkant Bayraktar
+ * @version 1.0
+ * 
+ * dedicated to Izel Yemisci
+ * */
+
+
 int main (){
 //Game(uint maxTurnNumber, uint boardSize, Coordinate chest);
     Coordinate c = Coordinate(10,10);
