@@ -104,11 +104,31 @@ Goal Game::playTurnForPlayer(Player* player){
     
     for(Goal goal : player->getGoalPriorityList()){
         if(goal == ATTACK){
-            for(Coordinate attackableCoordinate : player->getAttackableCoordinates())
+            for(Coordinate attackableCoordinate : player->getAttackableCoordinates()){
+                if(getBoard()->isCoordinateInBoard(attackableCoordinate) && getBoard()->isPlayerOnCoordinate(attackableCoordinate)){
+                    Player *p = getBoard()->operator[](attackableCoordinate);
+                    if(p->getTeam() != player->getTeam()){
+                        player->attack(p);
+                        return ATTACK;
+                    }
+                }
+            }
         }
         else if(goal == HEAL){
-
+            bool isHealed = false;
+            for(Coordinate healableCoordinate : player->getHealableCoordinates()){
+                if(getBoard()->isCoordinateInBoard(healableCoordinate) && getBoard()->isPlayerOnCoordinate(healableCoordinate)){
+                    Player *p = getBoard()->operator[](healableCoordinate);
+                    if(p->getTeam() == player->getTeam()){
+                        player->heal(p);
+                        isHealed =true;
+                    }
+                }
+            }
+            if(isHealed)
+                return HEAL;
         }
+
         else if (goal == TO_ALLY){
 
         }

@@ -56,6 +56,7 @@ std::vector<Coordinate> Archer::getAttackableCoordinates(){
 
     for(Coordinate offset : attackOffsets){
         Coordinate attackableCoordinate = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        attackableCoordinates.push_back(attackableCoordinate);
     }
     
     return attackableCoordinates;

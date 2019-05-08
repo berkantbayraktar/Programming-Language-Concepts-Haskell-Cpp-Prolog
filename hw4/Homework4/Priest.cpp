@@ -57,7 +57,8 @@ std::vector<Coordinate> Priest::getMoveableCoordinates(){
     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : moveOffsets){
-        Coordinate moveableCoordinates = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        Coordinate moveableCoordinate = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        moveableCoordinates.push_back(moveableCoordinate);
     }
     return moveableCoordinates;
 }
@@ -66,7 +67,8 @@ std::vector<Coordinate> Priest::getHealableCoordinates(){
     std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : healOffsets){
-        Coordinate healableCoordinates = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        Coordinate healableCoordinate = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        healableCoordinates.push_back(healableCoordinate);
     }
     return healableCoordinates;
 }

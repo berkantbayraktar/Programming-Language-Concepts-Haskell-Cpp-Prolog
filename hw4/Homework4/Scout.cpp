@@ -60,6 +60,7 @@ std::vector<Coordinate> Scout::getAttackableCoordinates(){
 
     for(Coordinate offset : attackOffsets){
         Coordinate attackableCoordinate = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        attackableCoordinates.push_back(attackableCoordinate);
     }
     
     return attackableCoordinates;
@@ -69,7 +70,8 @@ std::vector<Coordinate> Scout::getMoveableCoordinates(){
     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
     for(Coordinate offset : moveOffsets){
-        Coordinate moveableCoordinates = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        Coordinate moveableCoordinate = Coordinate(coordinate.x + offset.x , coordinate.y + offset.y);
+        moveableCoordinates.push_back(moveableCoordinate);
     }
     return moveableCoordinates;
 }

@@ -55,14 +55,16 @@ void Player::heal(Player *ally){
 
 
 void Player::movePlayerToCoordinate(Coordinate c){
-    std::vector <Coordinate> moveableCoordinates = this->getMoveableCoordinates();
-    for(Coordinate current : moveableCoordinates){
-        if(current == c){
-            std::cout << "Player " << this->getBoardID() << " moved from (" << this->getCoord().x << "/" << this->getCoord().y << ") to (" << c.x << "/" << c.y << ")" << std::endl;   // "Player 01 moved from (0/1) to (0/2)"
-            this->coordinate = c; 
-        }
-    }
-    
+    // std::vector <Coordinate> moveableCoordinates = this->getMoveableCoordinates();
+    // for(Coordinate current : moveableCoordinates){
+    //     //std::cout << "x: " <<current.x << "y: " << current.y << std::endl;
+    //     if(current == c){
+    //         std::cout << "Player " << this->getBoardID() << " moved from (" << this->getCoord().x << "/" << this->getCoord().y << ") to (" << c.x << "/" << c.y << ")" << std::endl;   // "Player 01 moved from (0/1) to (0/2)"
+    //         this->coordinate = c; 
+    //     }
+    // }
+    std::cout << "Player " << this->getBoardID() << " moved from (" << this->getCoord().x << "/" << this->getCoord().y << ") to (" << c.x << "/" << c.y << ")" << std::endl;   // "Player 01 moved from (0/1) to (0/2)"
+    this->coordinate = c;
 }
 
 bool Player::isDead() const{
