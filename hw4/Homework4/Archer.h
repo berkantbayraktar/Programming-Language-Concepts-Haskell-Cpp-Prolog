@@ -20,6 +20,7 @@ class Archer : public Player{
     int getAttackDamage() const;
     int getHealPower() const;
     int getMaxHP() const;
+    std::vector<Goal> getGoalPriorityList();
     const std::string getClassAbbreviation() const;
     std::vector<Coordinate> getAttackableCoordinates();
     std::vector<Coordinate> getMoveableCoordinates();

@@ -22,9 +22,7 @@ const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1)
 
 Scout::Scout(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, _team){
     this->HP = this->getMaxHP();
-    goalPriority.push_back(CHEST);
-    goalPriority.push_back(TO_ALLY);
-    goalPriority.push_back(ATTACK);
+    
 }
 
 int Scout::getAttackDamage() const{
@@ -37,6 +35,16 @@ int Scout::getHealPower() const{
 
 int Scout::getMaxHP() const{
     return 125;
+}
+
+std::vector<Goal> Scout::getGoalPriorityList(){
+    std::vector<Goal> goalPriority = std::vector <Goal>();
+
+    goalPriority.push_back(CHEST);
+    goalPriority.push_back(TO_ALLY);
+    goalPriority.push_back(ATTACK);
+    
+    return goalPriority;
 }
 
 const std::string Scout::getClassAbbreviation() const{

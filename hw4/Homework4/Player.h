@@ -17,8 +17,6 @@ protected:
 	//DO NOT MODIFY THE UPPER PART
 	//ADD YOU OWN PROVATE METHODS/PROPERTIES BELOW
 
-	std::vector<Goal> goalPriority;
-
 public:
 
 	/**
@@ -65,7 +63,7 @@ public:
 	 *
 	 * @return the goal priority list for the Player
 	 */
-	virtual std::vector<Goal> getGoalPriorityList();
+	virtual std::vector<Goal> getGoalPriorityList() = 0;
 	/**
 	 * @return the class abbreviation of player, if the player is on the barbarian
 	 * team, the abbreviation will consist of uppercase characters, otherwise it

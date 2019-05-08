@@ -84,7 +84,7 @@ bool Game::isGameEnded(){
 
 void Game::playTurn(){
     std::sort(players.begin(), players.end(), [](Player  *pl,Player *pr) {
-    return (pl->getBoardID() > pr->getBoardID()) ;
+    return (pl->getBoardID() < pr->getBoardID()) ;
 });
     // "Turn 13 has started."
     std::cout << "Turn " << turnNumber << " has started." <<std::endl;
@@ -96,5 +96,5 @@ void Game::playTurn(){
 }
 
 Goal Game::playTurnForPlayer(Player* player){
-    //IMPLEMENT
+    std::cout << "playerID : "  << player->getID() << std::endl;
 }

@@ -5,10 +5,7 @@ YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 */
 
-Player::Player(uint id,int x, int y, Team team): id(id), coordinate(Coordinate(x,y)), team(team){
-    goalPriority =  std::vector<Goal>();
-}
-
+Player::Player(uint id,int x, int y, Team team): id(id), coordinate(Coordinate(x,y)), team(team){}
 
 uint Player::getID() const{
     return id;
@@ -40,10 +37,6 @@ std::string Player::getBoardID(){
         return str_id;
     }
           
-}
-
-std::vector<Goal> Player::getGoalPriorityList(){
-    return goalPriority;
 }
 
 bool Player::attack(Player *enemy){

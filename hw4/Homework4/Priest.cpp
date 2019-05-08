@@ -22,9 +22,6 @@ const std::vector<Coordinate> healOffsets = {Coordinate(-1,0), Coordinate(0,1), 
 
 Priest::Priest(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, _team){
     this->HP = this->getMaxHP();
-    goalPriority.push_back(HEAL);
-    goalPriority.push_back(TO_ALLY);
-    goalPriority.push_back(CHEST);
 }
 
 int Priest::getAttackDamage() const{
@@ -37,6 +34,15 @@ int Priest::getHealPower() const{
 
 int Priest::getMaxHP() const{
     return 150;
+}
+
+std::vector<Goal> Priest::getGoalPriorityList(){
+    std::vector<Goal> goalPriority = std::vector <Goal>();
+    goalPriority.push_back(HEAL);
+    goalPriority.push_back(TO_ALLY);
+    goalPriority.push_back(CHEST);
+
+    return goalPriority;
 }
 
 const std::string Priest::getClassAbbreviation() const{

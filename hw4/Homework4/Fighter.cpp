@@ -21,9 +21,7 @@ const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1)
 
 Fighter::Fighter(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, _team){
     this->HP = this->getMaxHP();
-    goalPriority.push_back(ATTACK);
-    goalPriority.push_back(TO_ENEMY);
-    goalPriority.push_back(CHEST);
+    
 }
 
 int Fighter::getAttackDamage() const{
@@ -36,6 +34,16 @@ int Fighter::getHealPower() const{
 
 int Fighter::getMaxHP() const{
     return 400;
+}
+
+std::vector<Goal> Fighter::getGoalPriorityList(){
+    std::vector<Goal> goalPriority = std::vector <Goal>();
+    
+    goalPriority.push_back(ATTACK);
+    goalPriority.push_back(TO_ENEMY);
+    goalPriority.push_back(CHEST);
+
+    return goalPriority;
 }
 
 const std::string Fighter::getClassAbbreviation() const{

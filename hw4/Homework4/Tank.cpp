@@ -22,9 +22,7 @@ const std::vector<Coordinate> attackOffsets = {Coordinate(-1,0), Coordinate(0,1)
 
 Tank::Tank(uint _id , int _x , int _y , Team _team): Player(_id, _x, _y, _team){
     this->HP = this->getMaxHP();
-    goalPriority.push_back(TO_ENEMY);
-    goalPriority.push_back(ATTACK);
-    goalPriority.push_back(CHEST);
+    
 }
 
 int Tank::getAttackDamage() const{
@@ -37,6 +35,16 @@ int Tank::getHealPower() const{
 
 int Tank::getMaxHP() const{
     return 1000;
+}
+
+std::vector<Goal> Tank::getGoalPriorityList(){
+    std::vector<Goal> goalPriority = std::vector <Goal>();
+
+    goalPriority.push_back(TO_ENEMY);
+    goalPriority.push_back(ATTACK);
+    goalPriority.push_back(CHEST);
+    
+    return goalPriority;
 }
 
 const std::string Tank::getClassAbbreviation() const{

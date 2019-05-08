@@ -11,6 +11,7 @@ int main (){
     std::cout << std::endl;
     std::cout << std::endl;
     g->getBoard()->printBoardwithID();
+    g->playTurn();
     delete g;
     return 0;
 }
