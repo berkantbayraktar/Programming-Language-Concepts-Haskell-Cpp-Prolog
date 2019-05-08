@@ -34,11 +34,11 @@ public:
    * @param x x coordinate of the new player.
    * @param y y coordinate of the new player.
    * @param team team of the new player.
-   * @param class class of the new player as string, One of "ARCHER", "FIGHTER",
+   * @param cls class of the new player as string, One of "ARCHER", "FIGHTER",
    * "PRIEST", "SCOUT", "TANK".
    *
    */
-  void addPlayer(int id, int x, int y, Team team, std::string c);
+  void addPlayer(int id, int x, int y, Team team, std::string cls);
 
   /**
    * The game ends when either of these happens:

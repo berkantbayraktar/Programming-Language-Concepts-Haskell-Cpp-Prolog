@@ -16,7 +16,7 @@ Game::Game(uint maxTurnNumber, uint boardSize, Coordinate chest): maxTurnNumber(
 }
 
 Game::~Game(){
-    //IMPLEMENT
+    std::cout<< "~Game()" << std::endl;
 }
 
 void Game::addPlayer(int id, int x, int y, Team team, std::string c ){

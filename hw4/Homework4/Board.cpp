@@ -9,7 +9,7 @@ Board::Board(uint _size, std::vector<Player*>* _players, Coordinate chest): size
 }
 
 Board::~Board(){
-    //IMPLEMENT
+    std::cout<< "~Board()" << std::endl;
 }
 
 bool Board::isCoordinateInBoard(const Coordinate& c){

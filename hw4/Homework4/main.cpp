@@ -7,6 +7,10 @@ int main (){
     Game *g ;
     g = InputParser::parseGame();
     g->board.printBoardwithClass();
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
     g->board.printBoardwithID();
+    delete g;
     return 0;
 }
