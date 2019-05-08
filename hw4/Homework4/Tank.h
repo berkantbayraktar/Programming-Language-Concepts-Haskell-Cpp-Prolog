@@ -22,6 +22,7 @@ class Tank : public Player{
     const std::string getClassAbbreviation() const;
     std::vector<Coordinate> getAttackableCoordinates();
     std::vector<Coordinate> getMoveableCoordinates();
+    std::vector<Coordinate> getHealableCoordinates();
 };
 
 #endif

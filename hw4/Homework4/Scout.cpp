@@ -65,3 +65,9 @@ std::vector<Coordinate> Scout::getMoveableCoordinates(){
     }
     return moveableCoordinates;
 }
+
+std::vector<Coordinate> Scout::getHealableCoordinates(){
+    std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
+
+    return healableCoordinates;
+}

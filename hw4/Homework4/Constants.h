@@ -11,7 +11,8 @@ enum Goal{
 	HEAL,
 	TO_ALLY,
 	TO_ENEMY,
-	CHEST
+	CHEST,
+	NO_GOAL
 };
 
 

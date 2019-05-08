@@ -46,10 +46,6 @@ std::vector<Goal> Player::getGoalPriorityList(){
     return goalPriority;
 }
 
-const std::string Player::getClassAbbreviation() const{
-    return "XD";
-}
-
 bool Player::attack(Player *enemy){
     enemy->HP -= this->getAttackDamage();
     std::cout<< "Player " << this->getBoardID() << " attacked " << "Player " << enemy->getBoardID() << " (" << this->getAttackDamage() << ")" << std::endl;  // "Player 01 attacked Player 05 (75)"
@@ -64,26 +60,16 @@ void Player::heal(Player *ally){
     std::cout << "Player " << this->getBoardID() << " healed " << "Player " << ally->getBoardID() << std::endl;   // "Player 01 healed Player 05"
 }
 
-std::vector<Coordinate> Player::getAttackableCoordinates(){
-    std::vector <Coordinate> attackableCoordinates = std::vector <Coordinate> ();
-
-    return attackableCoordinates;
-}
-
-std::vector<Coordinate> Player::getMoveableCoordinates(){
-    std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
-
-    return moveableCoordinates;
-}
-
-std::vector<Coordinate> Player::getHealableCoordinates(){
-    std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
-
-    return healableCoordinates;
-}
 
 void Player::movePlayerToCoordinate(Coordinate c){
-    // IMPLEMENT
+    std::vector <Coordinate> moveableCoordinates = this->getMoveableCoordinates();
+    for(Coordinate current : moveableCoordinates){
+        if(current == c){
+            std::cout << "Player " << this->getBoardID() << " moved from (" << this->getCoord().x << "/" << this->getCoord().y << ") to (" << c.x << "/" << c.y << ")" << std::endl;   // "Player 01 moved from (0/1) to (0/2)"
+            this->coordinate = c; 
+        }
+    }
+    
 }
 
 bool Player::isDead() const{

@@ -73,7 +73,7 @@ public:
 	 *
 	 */
 
-	virtual const std::string getClassAbbreviation() const;
+	virtual const std::string getClassAbbreviation() const = 0;
 
 	/**
 	 * Attack the given player.
@@ -103,7 +103,7 @@ public:
 	 * of the unit. Empty vector if the unit cannot attack.
 	 */
 
-	virtual std::vector<Coordinate> getAttackableCoordinates();
+	virtual std::vector<Coordinate> getAttackableCoordinates() = 0;
 
 	/**
 	 * @Important The coordinates may not be on the board.
@@ -111,14 +111,14 @@ public:
 	 * @return the coordinates the unit is able to move given the position of the
 	 * unit. Empty vector if the unit cannot move.
 	 */
-	virtual std::vector<Coordinate> getMoveableCoordinates();
+	virtual std::vector<Coordinate> getMoveableCoordinates() = 0;
 
 	/**
 	 *
 	 * @return the coordinates the unit is able to heal allies given the position of the
 	 * unit. Empty vector if none available.
 	 */
-	virtual std::vector<Coordinate> getHealableCoordinates();
+	virtual std::vector<Coordinate> getHealableCoordinates() = 0;
 
 	/**
 	 * Move player to coordinate. Print the boardID of the player and the old and new

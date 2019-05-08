@@ -22,6 +22,8 @@ class Archer : public Player{
     int getMaxHP() const;
     const std::string getClassAbbreviation() const;
     std::vector<Coordinate> getAttackableCoordinates();
+    std::vector<Coordinate> getMoveableCoordinates();
+    std::vector<Coordinate> getHealableCoordinates();
 };
 
 #endif

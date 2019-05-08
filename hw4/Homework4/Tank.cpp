@@ -65,3 +65,9 @@ std::vector<Coordinate> Tank::getMoveableCoordinates(){
     }
     return moveableCoordinates;
 }
+
+std::vector<Coordinate> Tank::getHealableCoordinates(){
+    std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
+
+    return healableCoordinates;
+}

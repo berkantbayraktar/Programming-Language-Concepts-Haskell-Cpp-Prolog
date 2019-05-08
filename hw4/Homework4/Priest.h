@@ -20,8 +20,9 @@ class Priest : public Player{
     int getHealPower() const;
     int getMaxHP() const;
     const std::string getClassAbbreviation() const;
-    std::vector<Coordinate> getHealableCoordinates();
+    std::vector<Coordinate> getAttackableCoordinates();
     std::vector<Coordinate> getMoveableCoordinates();
+    std::vector<Coordinate> getHealableCoordinates();
 };
 
 #endif

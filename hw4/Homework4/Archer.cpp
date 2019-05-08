@@ -53,14 +53,14 @@ std::vector<Coordinate> Archer::getAttackableCoordinates(){
     return attackableCoordinates;
 }
 
-// std::vector<Coordinate> Archer::getMoveableCoordinates(){
-//     std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
+std::vector<Coordinate> Archer::getMoveableCoordinates(){
+    std::vector <Coordinate> moveableCoordinates = std::vector <Coordinate>();
 
-//     return moveableCoordinates;
-// }
+    return moveableCoordinates;
+}
 
-// std::vector<Coordinate> Archer::getHealableCoordinates(){
-//     std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
+std::vector<Coordinate> Archer::getHealableCoordinates(){
+    std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
 
-//     return healableCoordinates;
-// }
+    return healableCoordinates;
+}

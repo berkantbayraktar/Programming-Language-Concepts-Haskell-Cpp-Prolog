@@ -64,3 +64,9 @@ std::vector<Coordinate> Fighter::getMoveableCoordinates(){
     }
     return moveableCoordinates;
 }
+
+std::vector<Coordinate> Fighter::getHealableCoordinates(){
+    std::vector <Coordinate> healableCoordinates = std::vector <Coordinate>();
+
+    return healableCoordinates;
+}

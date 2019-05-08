@@ -2,10 +2,16 @@
 #define HW4_GAME_H
 
 #include"Board.h"
+#include"Archer.h"
+#include"Fighter.h"
+#include"Priest.h"
+#include"Scout.h"
+#include"Tank.h"
+
 class Game{
 
 private:
-  
+  Board board;
   uint turnNumber;
   uint maxTurnNumber;
   std::vector<Player*> players;
@@ -14,7 +20,6 @@ private:
 	//ADD YOU OWN PROVATE METHODS/PROPERTIES BELOW
 
 public:
-  Board board;
   /**
    * Costructor for Game class.
    * Game manages the memory allocated for future contents the vector (added players).
@@ -25,7 +30,12 @@ public:
    * @param chest coordinate of the chest
    */
   Game(uint maxTurnNumber, uint boardSize, Coordinate chest);
+
   ~Game();
+
+  Board* getBoard(){
+    return &(this->board);
+  }
 
   /**
    * Add a new player to the game. Add a pointer to the new player to the this->players vector.
@@ -72,7 +82,7 @@ public:
    */
   void playTurn();
   /**
-   * Play a turn for the player with the given ID.
+   * Play a turn for the given player.
    * If the player is dead announce its death by printing the boardID of the player
    * as in "Player 07 died.". Remove that player from the board and release its resources.
    *

@@ -6,11 +6,11 @@ int main (){
     Coordinate c = Coordinate(10,10);
     Game *g ;
     g = InputParser::parseGame();
-    g->board.printBoardwithClass();
+    g->getBoard()->printBoardwithClass();
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
-    g->board.printBoardwithID();
+    g->getBoard()->printBoardwithID();
     delete g;
     return 0;
 }

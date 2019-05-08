@@ -65,4 +65,9 @@ std::vector<Coordinate> Priest::getHealableCoordinates(){
     return healableCoordinates;
 }
 
+std::vector<Coordinate> Priest::getAttackableCoordinates(){
+    std::vector <Coordinate> attackableCoordinates = std::vector <Coordinate> ();
+
+    return attackableCoordinates;
+}
 
