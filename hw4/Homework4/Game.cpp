@@ -1,11 +1,12 @@
 #include"Game.h"
 #include <algorithm>
+#include <limits.h>
 /*
 YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 */
 
-Game::Game(uint maxTurnNumber, uint boardSize, Coordinate chest): maxTurnNumber(maxTurnNumber), turnNumber(0), board(Board(boardSize,&players ,chest)){
+Game::Game(uint maxTurnNumber, uint boardSize, Coordinate chest): maxTurnNumber(maxTurnNumber), turnNumber(1), board(Board(boardSize,&players ,chest)){
     players = std::vector<Player*>();
     // Board b = Board(boardSize,&players ,chest); !!!!!!!!!!!!!!!
     // this->board = b;
@@ -83,7 +84,8 @@ bool Game::isGameEnded(){
 }
 
 void Game::playTurn(){
-    std::sort(players.begin(), players.end(), [](Player  *pl,Player *pr) {
+    if(turnNumber <= maxTurnNumber && maxTurnNumber >= 1){
+        std::sort(players.begin(), players.end(), [](Player  *pl,Player *pr) {
     return (pl->getBoardID() < pr->getBoardID()) ;
 });
     // "Turn 13 has started."
@@ -91,8 +93,9 @@ void Game::playTurn(){
     
     for(std::vector<Player*>::iterator it  = players.begin() ; it != players.end() ; it++){
             this->playTurnForPlayer(*it);
-        }
-
+    }
+    turnNumber++;
+    }
 }
 
 Goal Game::playTurnForPlayer(Player* player){
@@ -130,13 +133,63 @@ Goal Game::playTurnForPlayer(Player* player){
         }
 
         else if (goal == TO_ALLY){
+            std::vector<Player*> allyList = std::vector<Player*> ();    // create an emptly list holds enemies
+
+            for(std::vector<Player*> :: iterator it = players.begin(); it != players.end(); it++){  // push all enemy in the Game into the list
+                if((*it)->getTeam() == player->getTeam())
+                    allyList.push_back(*it);
+            }
+
+            std::sort(allyList.begin(),allyList.end(),[player](Player* l, Player *r){ // sort the list to be lower manhattan distance Player at the front.
+                
+                return ( (player->getCoord()- l->getCoord()) < (player->getCoord() - r->getCoord()) );
+            });
+
+            int min = INT_MAX; int index = -1 ;
+            for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
+                if(getBoard()->isCoordinateInBoard(player->getMoveableCoordinates().at(i)) && !getBoard()->isPlayerOnCoordinate(player->getMoveableCoordinates().at(i))){
+                    if((player->getMoveableCoordinates().at(i) - allyList.at(0)->getCoord() ) < min ){
+                        min = (player->getMoveableCoordinates().at(i) - allyList.at(0)->getCoord() );
+                        index = i;
+                    }
+                }
+            }
+            if(index != -1) {
+                player->movePlayerToCoordinate(player->getMoveableCoordinates().at(index));
+                return TO_ALLY;
+            }
 
         }
         else if (goal == TO_ENEMY){
+            std::vector<Player*> enemyList = std::vector<Player*> ();    // create an emptly list holds enemies
+
+            for(std::vector<Player*> :: iterator it = players.begin(); it != players.end(); it++){  // push all enemy in the Game into the list
+                if((*it)->getTeam() != player->getTeam())
+                    enemyList.push_back(*it);
+            }
+
+            std::sort(enemyList.begin(),enemyList.end(),[player](Player* l, Player *r){ // sort the list to be lower manhattan distance Player at the front.
+                
+                return ( (player->getCoord()- l->getCoord()) < (player->getCoord() - r->getCoord()) );
+            });
+
+            int min = INT_MAX; int index = -1 ;
+            for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
+                if(getBoard()->isCoordinateInBoard(player->getMoveableCoordinates().at(i)) && !getBoard()->isPlayerOnCoordinate(player->getMoveableCoordinates().at(i))){
+                    if((player->getMoveableCoordinates().at(i) - enemyList.at(0)->getCoord() ) < min ){
+                        min = (player->getMoveableCoordinates().at(i) - enemyList.at(0)->getCoord() );
+                        index = i;
+                    }
+                }
+            }
+            if(index != -1) {
+                player->movePlayerToCoordinate(player->getMoveableCoordinates().at(index));
+                return TO_ENEMY;
+            }
 
         }
         else if (goal == CHEST){
-
+            std::cout << "isHERE ?????" <<std::endl;
         }
     }
 

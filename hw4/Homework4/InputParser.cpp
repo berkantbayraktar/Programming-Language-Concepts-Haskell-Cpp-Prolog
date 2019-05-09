@@ -16,6 +16,7 @@ IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
    * Example input:
    * 6
    * 3 3
+   * 29
    * 2
    * 12 ARCHER BARBARIAN 3 5
    * 11 FIGHTER KNIGHT 1 1
@@ -25,13 +26,14 @@ IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 
 
 Game* InputParser::parseGame(){
-    int boardSize; int chest_x, chest_y ; int numberOfPlayers;
+    int boardSize; int chest_x, chest_y ; int numberOfPlayers; int maxTurn;
 
     std:: cin >> boardSize;
     std::cin >> chest_x >> chest_y ;
+    std::cin >> maxTurn;
     std::cin >> numberOfPlayers;
 
-    Game *g = new Game(100, boardSize,Coordinate(chest_x,chest_y));
+    Game *g = new Game(maxTurn, boardSize,Coordinate(chest_x,chest_y));
 
     for(int i = 0 ; i < numberOfPlayers ; i++){
         uint id; std::string playerClass, teamName; int x; int y;
