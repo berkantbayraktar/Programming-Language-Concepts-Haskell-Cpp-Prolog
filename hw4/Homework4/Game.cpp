@@ -103,28 +103,29 @@ Goal Game::playTurnForPlayer(Player* player){
         std::cout << "Player " << player->getBoardID() << " died." << std::endl;
         delete player;
         player = NULL;
+        return NO_GOAL;
     }
     
     for(Goal goal : player->getGoalPriorityList()){
         if(goal == ATTACK){
-            for(Coordinate attackableCoordinate : player->getAttackableCoordinates()){
-                if(getBoard()->isCoordinateInBoard(attackableCoordinate) && getBoard()->isPlayerOnCoordinate(attackableCoordinate)){
-                    Player *p = getBoard()->operator[](attackableCoordinate);
-                    if(p->getTeam() != player->getTeam()){
-                        player->attack(p);
+            for(std::vector<Player*>::iterator it = players.begin() ; it != players.end() ; it++){
+                for(Coordinate attackableCoordinate : player->getAttackableCoordinates()){
+                    if((*it)->getCoord() == attackableCoordinate  && (*it)->getTeam() != player->getTeam()){
+                        player->attack(*it);
                         return ATTACK;
                     }
+                        
                 }
             }
+            
         }
         else if(goal == HEAL){
             bool isHealed = false;
-            for(Coordinate healableCoordinate : player->getHealableCoordinates()){
-                if(getBoard()->isCoordinateInBoard(healableCoordinate) && getBoard()->isPlayerOnCoordinate(healableCoordinate)){
-                    Player *p = getBoard()->operator[](healableCoordinate);
-                    if(p->getTeam() == player->getTeam()){
-                        player->heal(p);
-                        isHealed =true;
+            for(std::vector<Player*>::iterator it = players.begin() ; it != players.end() ; it++){
+                for(Coordinate healableCoordinate : player->getHealableCoordinates()){
+                    if((*it)->getCoord() == healableCoordinate  && (*it)->getTeam() == player->getTeam()){
+                        player->heal(*it);
+                        isHealed = true;
                     }
                 }
             }
@@ -136,8 +137,10 @@ Goal Game::playTurnForPlayer(Player* player){
             std::vector<Player*> allyList = std::vector<Player*> ();    // create an emptly list holds enemies
 
             for(std::vector<Player*> :: iterator it = players.begin(); it != players.end(); it++){  // push all enemy in the Game into the list
-                if((*it)->getTeam() == player->getTeam())
+                if((*it)->getTeam() == player->getTeam() && (*it)->getBoardID() != player->getBoardID() )
                     allyList.push_back(*it);
+                
+                    
             }
 
             std::sort(allyList.begin(),allyList.end(),[player](Player* l, Player *r){ // sort the list to be lower manhattan distance Player at the front.
@@ -145,7 +148,7 @@ Goal Game::playTurnForPlayer(Player* player){
                 return ( (player->getCoord()- l->getCoord()) < (player->getCoord() - r->getCoord()) );
             });
 
-            int min = INT_MAX; int index = -1 ;
+            int min = player->getCoord() - allyList.at(0)->getCoord(); int index = -1 ;
             for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
                 if(getBoard()->isCoordinateInBoard(player->getMoveableCoordinates().at(i)) && !getBoard()->isPlayerOnCoordinate(player->getMoveableCoordinates().at(i))){
                     if((player->getMoveableCoordinates().at(i) - allyList.at(0)->getCoord() ) < min ){
@@ -173,7 +176,7 @@ Goal Game::playTurnForPlayer(Player* player){
                 return ( (player->getCoord()- l->getCoord()) < (player->getCoord() - r->getCoord()) );
             });
 
-            int min = INT_MAX; int index = -1 ;
+            int min = player->getCoord() - enemyList.at(0)->getCoord() ; int index = -1 ;
             for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
                 if(getBoard()->isCoordinateInBoard(player->getMoveableCoordinates().at(i)) && !getBoard()->isPlayerOnCoordinate(player->getMoveableCoordinates().at(i))){
                     if((player->getMoveableCoordinates().at(i) - enemyList.at(0)->getCoord() ) < min ){

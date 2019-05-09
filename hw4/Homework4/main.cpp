@@ -19,7 +19,15 @@ int main (){
     std::cout << std::endl;
     std::cout << std::endl;
     g->getBoard()->printBoardwithID();
+    Board *board = g->getBoard();
+    while(!g->isGameEnded()){
     g->playTurn();
+    board->printBoardwithClass();
+    std::cout << "--------------" << std::endl;
+    board->printBoardwithID();
+
+
+  }
     delete g;
     return 0;
 }
