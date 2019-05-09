@@ -59,16 +59,16 @@ bool Game::isGameEnded(){
     }
 
     if(numberOfBarbarians == 0){
-        std::cout  << "Game ended at turn " << this->turnNumber << ". All barbarians dead. Knight victory." << std::endl;
+        std::cout  << "Game ended at turn " << this->turnNumber-1 << ". All barbarians dead. Knight victory." << std::endl;
         return true;
     }
     else if (numberOfKnights == 0){
-        std::cout  << "Game ended at turn " << this->turnNumber << ". All knights dead. Barbarian victory." << std::endl;
+        std::cout  << "Game ended at turn " << this->turnNumber-1 << ". All knights dead. Barbarian victory." << std::endl;
         return true;
     }
 
     else if (isCaptured){
-        std::cout  << "Game ended at turn " << this->turnNumber << ". Chest captured. Barbarian victory." << std::endl;
+        std::cout  << "Game ended at turn " << this->turnNumber-1 << ". Chest captured. Barbarian victory." << std::endl;
         return true;
     }
     else if (turnNumber == maxTurnNumber){
@@ -91,9 +91,15 @@ void Game::playTurn(){
     // "Turn 13 has started."
     std::cout << "Turn " << turnNumber << " has started." <<std::endl;
     
-    for(std::vector<Player*>::iterator it  = players.begin() ; it != players.end() ; it++){
-            this->playTurnForPlayer(*it);
+    for(int i = 0 ; i < players.size() ; i++){
+        int bef = players.size();
+        playTurnForPlayer(players.at(i));
+        int aft = players.size();
+        if(aft + 1 == bef)
+            i--;
     }
+        
+    
     turnNumber++;
     }
 }
@@ -101,8 +107,14 @@ void Game::playTurn(){
 Goal Game::playTurnForPlayer(Player* player){
     if(player->getHP() <= 0){
         std::cout << "Player " << player->getBoardID() << " died." << std::endl;
-        delete player;
-        player = NULL;
+        int index;
+        for(int i = 0; i < players.size() ; i++){
+            if(players.at(i)->getBoardID() == player->getBoardID()){
+                index = i;
+            }
+        }
+
+        players.erase(players.begin()+ index);
         return NO_GOAL;
     }
     
