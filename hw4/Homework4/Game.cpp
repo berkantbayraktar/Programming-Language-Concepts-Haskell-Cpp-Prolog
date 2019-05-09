@@ -49,7 +49,7 @@ bool Game::isGameEnded(){
     bool isCaptured = false;
 
     for(std::vector<Player*>::iterator it  = players.begin() ; it != players.end() ; it++){
-        if((*it)->getCoord() == board.getChestCoordinates())
+        if((*it)->getCoord() == board.getChestCoordinates() && ((*it)->getTeam() == BARBARIANS) )
             isCaptured = true;
 
         if((*it)->getTeam() == BARBARIANS)
@@ -189,7 +189,19 @@ Goal Game::playTurnForPlayer(Player* player){
 
         }
         else if (goal == CHEST){
-            std::cout << "isHERE ?????" <<std::endl;
+            int min = INT_MAX; int index = -1 ;
+            for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
+                if(getBoard()->isCoordinateInBoard(player->getMoveableCoordinates().at(i)) && !getBoard()->isPlayerOnCoordinate(player->getMoveableCoordinates().at(i))){
+                    if((player->getMoveableCoordinates().at(i) - getBoard()->getChestCoordinates() ) < min ){
+                        min = (player->getMoveableCoordinates().at(i) -getBoard()->getChestCoordinates());
+                        index = i;
+                    }
+                }
+            }
+            if(index != -1) {
+                player->movePlayerToCoordinate(player->getMoveableCoordinates().at(index));
+                return CHEST;
+            }
         }
     }
 
