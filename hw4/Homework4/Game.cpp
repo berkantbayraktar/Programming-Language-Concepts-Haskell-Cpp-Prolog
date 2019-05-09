@@ -106,7 +106,7 @@ void Game::playTurn(){
 
 Goal Game::playTurnForPlayer(Player* player){
     if(player->getHP() <= 0){
-        std::cout << "Player " << player->getBoardID() << " died." << std::endl;
+        std::cout << "Player " << player->getBoardID() << " has died." << std::endl;
         int index;
         for(int i = 0; i < players.size() ; i++){
             if(players.at(i)->getBoardID() == player->getBoardID()){

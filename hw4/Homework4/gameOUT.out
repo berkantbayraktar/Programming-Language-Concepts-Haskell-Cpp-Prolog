@@ -130,13 +130,13 @@ Player 01 attacked Player 07 (50)
 Player 02 moved from (3/2) to (2/2)
 Player 03 moved from (3/5) to (2/4)
 Player 04 attacked Player 03 (25)
-Player 05 died.
+Player 05 has died.
 Player 06 moved from (3/4) to (3/3)
 Player 07 attacked Player 01 (25)
 Player 09 moved from (1/3) to (1/2)
 __ __ __ __ __ __ __ __ 
 __ __ __ __ __ __ __ __ 
-__ Ch fi __ __ __ __ __ 
+__ SC fi __ __ __ __ __ 
 __ __ ta FI ta __ __ __ 
 __ __ SC __ AR __ __ __ 
 __ __ __ __ __ __ AR __ 
@@ -145,7 +145,7 @@ __ __ __ __ __ __ __ __
 --------------
 __ __ __ __ __ __ __ __ 
 __ __ __ __ __ __ __ __ 
-__ Ch 02 __ __ __ __ __ 
+__ 09 02 __ __ __ __ __ 
 __ __ 04 06 07 __ __ __ 
 __ __ 03 __ 01 __ __ __ 
 __ __ __ __ __ __ 08 __ 

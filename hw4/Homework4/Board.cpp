@@ -40,7 +40,7 @@ void Board::printBoardwithID(){
     for(int j = 0 ; j < size ; j++){
         for(int i = 0 ; i < size ; i++){
             Coordinate temp = Coordinate(i,j);
-            if(this->getChestCoordinates() == temp){
+            if(this->getChestCoordinates() == temp && (*this)[temp] == NULL){
                 std::cout << "Ch ";
             }
             else if((*this)[temp] == NULL){
@@ -59,7 +59,7 @@ void Board::printBoardwithClass(){
     for(int j = 0 ; j < size ; j++){
         for(int i = 0 ; i < size ; i++){
             Coordinate temp = Coordinate(i,j);
-            if(this->getChestCoordinates() == temp){
+            if(this->getChestCoordinates() == temp && (*this)[temp] == NULL){
                 std::cout << "Ch ";
             }
             else if((*this)[temp] == NULL){
