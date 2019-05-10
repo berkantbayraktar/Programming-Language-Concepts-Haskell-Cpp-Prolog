@@ -78,4 +78,3 @@ std::vector<Coordinate> Priest::getAttackableCoordinates(){
 
     return attackableCoordinates;
 }
-

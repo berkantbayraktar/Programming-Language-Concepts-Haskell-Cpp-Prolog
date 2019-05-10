@@ -150,10 +150,10 @@ Goal Game::playTurnForPlayer(Player* player){
 
             for(std::vector<Player*> :: iterator it = players.begin(); it != players.end(); it++){  // push all enemy in the Game into the list
                 if((*it)->getTeam() == player->getTeam() && (*it)->getBoardID() != player->getBoardID() )
-                    allyList.push_back(*it);
-                
-                    
+                    allyList.push_back(*it);       
             }
+            if(allyList.size() == 0)
+                continue;
 
             std::sort(allyList.begin(),allyList.end(),[player](Player* l, Player *r){ // sort the list to be lower manhattan distance Player at the front.
                 
@@ -182,6 +182,9 @@ Goal Game::playTurnForPlayer(Player* player){
                 if((*it)->getTeam() != player->getTeam())
                     enemyList.push_back(*it);
             }
+
+            if(enemyList.size() == 0)
+                continue;
 
             std::sort(enemyList.begin(),enemyList.end(),[player](Player* l, Player *r){ // sort the list to be lower manhattan distance Player at the front.
                 
