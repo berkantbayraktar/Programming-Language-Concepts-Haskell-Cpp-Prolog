@@ -207,7 +207,7 @@ Goal Game::playTurnForPlayer(Player* player){
 
         }
         else if (goal == CHEST){
-            int min = INT_MAX; int index = -1 ;
+            int min = player->getCoord() - getBoard()->getChestCoordinates(); int index = -1 ;
             for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
                 if(getBoard()->isCoordinateInBoard(player->getMoveableCoordinates().at(i)) && !getBoard()->isPlayerOnCoordinate(player->getMoveableCoordinates().at(i))){
                     if((player->getMoveableCoordinates().at(i) - getBoard()->getChestCoordinates() ) < min ){
