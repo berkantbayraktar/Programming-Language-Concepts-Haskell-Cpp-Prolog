@@ -6,14 +6,17 @@ YOU MUST WRITE THE IMPLEMENTATIONS OF THE REQUESTED FUNCTIONS
 IN THIS FILE. START YOUR IMPLEMENTATIONS BELOW THIS LINE
 */
 
-Game::Game(uint maxTurnNumber, uint boardSize, Coordinate chest): maxTurnNumber(maxTurnNumber), turnNumber(1), board(Board(boardSize,&players ,chest)){
+Game::Game(uint maxTurnNumber, uint boardSize, Coordinate chest): maxTurnNumber(maxTurnNumber), turnNumber(0), board(Board(boardSize,&players ,chest)){
     players = std::vector<Player*>();
     // Board b = Board(boardSize,&players ,chest); !!!!!!!!!!!!!!!
     // this->board = b;
 }
 
 Game::~Game(){
-    std::cout<< "~Game()" << std::endl;
+    for(int i = 0 ; i < players.size() ; i++){
+	    delete players.at(i);
+	    players.at(i) = NULL;
+    }
 }
 
 void Game::addPlayer(int id, int x, int y, Team team, std::string c ){
@@ -59,16 +62,16 @@ bool Game::isGameEnded(){
     }
 
     if(numberOfBarbarians == 0){
-        std::cout  << "Game ended at turn " << this->turnNumber-1 << ". All barbarians dead. Knight victory." << std::endl;
+        std::cout  << "Game ended at turn " << this->turnNumber << ". All barbarians dead. Knight victory." << std::endl;
         return true;
     }
     else if (numberOfKnights == 0){
-        std::cout  << "Game ended at turn " << this->turnNumber-1 << ". All knights dead. Barbarian victory." << std::endl;
+        std::cout  << "Game ended at turn " << this->turnNumber << ". All knights dead. Barbarian victory." << std::endl;
         return true;
     }
 
     else if (isCaptured){
-        std::cout  << "Game ended at turn " << this->turnNumber-1 << ". Chest captured. Barbarian victory." << std::endl;
+        std::cout  << "Game ended at turn " << this->turnNumber << ". Chest captured. Barbarian victory." << std::endl;
         return true;
     }
     else if (turnNumber == maxTurnNumber){
@@ -88,6 +91,7 @@ void Game::playTurn(){
         std::sort(players.begin(), players.end(), [](Player  *pl,Player *pr) {
     return (pl->getBoardID() < pr->getBoardID()) ;
 });
+    turnNumber++;
     // "Turn 13 has started."
     std::cout << "Turn " << turnNumber << " has started." <<std::endl;
     
@@ -100,7 +104,7 @@ void Game::playTurn(){
     }
         
     
-    turnNumber++;
+    
     }
 }
 
@@ -189,7 +193,7 @@ Goal Game::playTurnForPlayer(Player* player){
             std::sort(enemyList.begin(),enemyList.end(),[player](Player* l, Player *r){ // sort the list to be lower manhattan distance Player at the front.
                 
                 return ( (player->getCoord()- l->getCoord()) < (player->getCoord() - r->getCoord()) );
-            });
+            });	
 
             int min = player->getCoord() - enemyList.at(0)->getCoord() ; int index = -1 ;
             for(int i = 0 ; i < player->getMoveableCoordinates().size() ; i++){
