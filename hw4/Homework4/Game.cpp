@@ -117,8 +117,10 @@ Goal Game::playTurnForPlayer(Player* player){
                 index = i;
             }
         }
-
+        Player *temp = players.at(index);
         players.erase(players.begin()+ index);
+        delete temp;
+        temp = NULL;
         return NO_GOAL;
     }
     
