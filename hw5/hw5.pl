@@ -22,5 +22,23 @@ ion( Name , Charge ):-
     last(L,Last),
     getCharge(Last,Charge).
 
+
+memberX(El, [H | T]) :- 
+    El = H;
+    member(El,T).
+
+ionic_pair(A,B,Number):-
+    ion(A,ChargeA), ion(B,ChargeB),
+    S is ChargeA + ChargeB, S = 0,
+    catomic_number(A,CatomicA), catomic_number(B,CatomicB),
+    Total is CatomicA + CatomicB, Total = Number.
+
+molecule(Catom_List,0).
 molecule(Catom_List, Total_Catomic_Number) :-
-    Total_Catomic_Number is 5.
+    between(0,Total_Catomic_Number,N),
+    N1 is Total_Catomic_Number - N,
+    catomic_number(Neym,N1),
+    Rest is Total_Catomic_Number - N1,
+    molecule(Rest_List,Rest),
+    Catom_List = [Neym | Rest_List].
+    
