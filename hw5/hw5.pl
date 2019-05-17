@@ -1,12 +1,6 @@
 :- module(hw5,[catomic_number/2, ion/2, molecule/2]).
 :- [catoms].
 
-sum([],0).
-
-sum([Head | Tail], Sum) :-
-    sum(Tail, SumTail),
-    Sum is SumTail + Head.
-
 getCharge(El,Charge) :-
     El =< 4 -> Charge is El.
 
@@ -15,7 +9,7 @@ getCharge(El,Charge):-
 
 catomic_number(Name, Catomic_Number) :-
     catom(Name,_, _, A),
-    sum(A,Catomic_Number).
+    sum_list(A,Catomic_Number).
 
 ion( Name , Charge ):-
     catom(Name,_, _, L),
@@ -24,7 +18,7 @@ ion( Name , Charge ):-
 
 eleminateNonIonics(Catom_List, Total_Catomic_Number) :-
     findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number),
-    sum(Total_Charge,Summation),
+    sum_list(Total_Charge,Summation),
     Summation = 0.
 
 findAllPossible(Catom_List,T,0) :-
