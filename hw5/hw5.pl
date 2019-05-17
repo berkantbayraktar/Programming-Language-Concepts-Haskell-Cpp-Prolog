@@ -22,21 +22,23 @@ ion( Name , Charge ):-
     last(L,Last),
     getCharge(Last,Charge).
 
-molecule(Catom_List, Total_Catomic_Number) :-
-    moleculess(Catom_List,Total_Charge,Total_Catomic_Number),
+eleminateNonIonics(Catom_List, Total_Catomic_Number) :-
+    findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number),
     sum(Total_Charge,Summation),
     Summation = 0.
-  
-moleculess(Catom_List,T,0) :-
+
+findAllPossible(Catom_List,T,0) :-
     T = [],
     Catom_List = [].
 
-moleculess(Catom_List,Total_Charge,Total_Catomic_Number) :-
+findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number) :-
     between(0,Total_Catomic_Number,N),
-    N1 is Total_Catomic_Number - N,
-    catomic_number(Neym,N1),
+    catomic_number(Neym,N),
     ion(Neym,Charge),
-    Rest is Total_Catomic_Number - N1,
-    moleculess(Rest_List,Remaining_Charge,Rest),
+    Rest is Total_Catomic_Number - N,
+    findAllPossible(Rest_List,Remaining_Charge,Rest),
     Total_Charge = [Charge | Remaining_Charge],
     Catom_List = [Neym | Rest_List].
+
+molecule(Catom_List, Total_Catomic_Number) :-
+    eleminateNonIonics(Catom_List, Total_Catomic_Number).
