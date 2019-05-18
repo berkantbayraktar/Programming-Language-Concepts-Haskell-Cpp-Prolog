@@ -16,21 +16,18 @@ ion( Name , Charge ):-
     last(L,Last),
     getCharge(Last,Charge).
 
-eleminateNonIonics(_,Total_Charge,_) :-
-    sum_list(Total_Charge,Summation),
-    Summation = 0.
-
 findAllPossible(Catom_List,T,0) :-
-    T = [],
+    T is 0 ,
     Catom_List = [].
 
 findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number) :-
+    Total_Catomic_Number > 0,
     catomic_number(Name,Current),
-    ion(Name,Charge),
     Current =< Total_Catomic_Number,
+    ion(Name,Charge),    
     Rest is Total_Catomic_Number - Current,
     findAllPossible(Rest_List,Remaining_Charge,Rest),
-    Total_Charge = [Charge | Remaining_Charge],
+    Total_Charge is Charge + Remaining_Charge,
     Catom_List = [Name | Rest_List].
 
 eleminateDuplicates([_|[]]).
@@ -42,5 +39,5 @@ eleminateDuplicates([H,M|Rest]) :-
 
 molecule(Catom_List, Total_Catomic_Number) :-
     findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number),
-    eleminateNonIonics(Catom_List,Total_Charge,Total_Catomic_Number),
+    Total_Charge = 0,
     eleminateDuplicates(Catom_List).
