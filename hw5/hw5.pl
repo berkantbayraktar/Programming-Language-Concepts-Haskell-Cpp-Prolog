@@ -26,9 +26,10 @@ findAllPossible(Catom_List,T,0) :-
 
 findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number) :-
     between(0,Total_Catomic_Number,N),
-    catomic_number(Name,N),
+    Current is Total_Catomic_Number - N,
+    catomic_number(Name,Current),
     ion(Name,Charge),
-    Rest is Total_Catomic_Number - N,
+    Rest is Total_Catomic_Number - Current,
     findAllPossible(Rest_List,Remaining_Charge,Rest),
     Total_Charge = [Charge | Remaining_Charge],
     Catom_List = [Name | Rest_List].
