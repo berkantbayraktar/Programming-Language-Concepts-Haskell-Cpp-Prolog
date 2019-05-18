@@ -1,12 +1,6 @@
 :- module(hw5,[catomic_number/2, ion/2, molecule/2]).
 :- [catoms].
 
-getCharge(El,Charge) :-
-    El =< 4 -> Charge is El.
-
-getCharge(El,Charge):-
-    El > 4 -> Charge is (El - 8).
-
 catomic_number(Name, Catomic_Number) :-
     catom(Name,_, _, A),
     sum_list(A,Catomic_Number).
@@ -14,7 +8,7 @@ catomic_number(Name, Catomic_Number) :-
 ion( Name , Charge ):-
     catom(Name,_, _, L),
     last(L,Last),
-    getCharge(Last,Charge).
+    (Last =< 4 -> Charge is Last ; Charge is (Last - 8)).
 
 findAllPossible(Catom_List,T,0) :-
     T is 0 ,
