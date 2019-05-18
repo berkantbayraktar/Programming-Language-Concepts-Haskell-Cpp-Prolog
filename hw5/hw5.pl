@@ -34,5 +34,14 @@ findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number) :-
     Total_Charge = [Charge | Remaining_Charge],
     Catom_List = [Neym | Rest_List].
 
+eleminateDuplicates([_|[]],[]).
+eleminateDuplicates([H,M|Rest],CLWD) :-
+    catomic_number(H,CNH),
+    catomic_number(M,CNM),
+    CNH =< CNM,
+    eleminateDuplicates([M|Rest], RR),
+    CLWD = [H | RR].
+
 molecule(Catom_List, Total_Catomic_Number) :-
-    eleminateNonIonics(Catom_List, Total_Catomic_Number).
+    eleminateNonIonics(Catom_List, Total_Catomic_Number),
+    eleminateDuplicates(Catom_List,Catom_List_Without_Duplicates).
