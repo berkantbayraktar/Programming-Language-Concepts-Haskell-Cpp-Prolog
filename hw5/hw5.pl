@@ -26,13 +26,6 @@ findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number,LL) :-
     Total_Charge is Charge + Remaining_Charge,
     Catom_List = [Name | Rest_List].
 
-eleminateDuplicates([_|[]]).
-eleminateDuplicates([H,M|Rest]) :-
-    catomic_number(H,CNH),
-    catomic_number(M,CNM),
-    CNH =< CNM,
-    eleminateDuplicates([M|Rest]).
-
 molecule(Catom_List, Total_Catomic_Number) :-
     findAllPossible(Catom_List,Total_Charge,Total_Catomic_Number,0),
     Total_Charge = 0.
